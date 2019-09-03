@@ -13,24 +13,22 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
 
 const Login = props => {
 
     const modalStyle = modalStyles();
 
-    const classes = loginFromStyles(); 
+    const classes = loginFromStyles();
 
     return (
         <React.Fragment>
             <Container component="main" maxWidth="sm">
                 <div className={modalStyle.paper}>
-                    <div>
-                        <CloseIcon />
-                    </div>
                     <div style={{
-                                textAlign: 'center',
-                                paddingTop: '30px'
-                            }}>
+                        textAlign: 'center',
+                        paddingTop: '30px'
+                    }}>
                         <Avatar className={classes.avatar}>
                             <LockOutlinedIcon />
                         </Avatar>
