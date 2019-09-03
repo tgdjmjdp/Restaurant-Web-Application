@@ -18,7 +18,7 @@ const Login = props => {
 
     const modalStyle = modalStyles();
 
-    const classes = loginFromStyles();
+    const classes = loginFromStyles(); 
 
     return (
         <React.Fragment>
