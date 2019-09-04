@@ -4,10 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import { useStyles } from '../../../Styles/Navbar'
 import { connect } from 'react-redux'
-import { openSideBar } from '../../../redux/actions/navAction'
 
 const Home = ({
-    openSideBar,
     navState: {
         sidebarOpen
     }
@@ -179,7 +177,6 @@ const Home = ({
 
 Home.propTypes = {
     navState: PropTypes.object.isRequired,
-    openSideBar: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({

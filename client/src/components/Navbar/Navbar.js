@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import AppBarTop from './Appbar/Appbar'
 import SideBar from './SideBar/SideBar'
 import { useStyles } from '../../Styles/Navbar'
@@ -16,10 +15,6 @@ const Navbar = props => {
             </div>
         </React.Fragment>
     )
-}
-
-Navbar.propTypes = {
-
 }
 
 export default Navbar

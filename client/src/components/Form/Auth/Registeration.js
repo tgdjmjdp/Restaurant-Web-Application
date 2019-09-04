@@ -1,16 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TextField from '@material-ui/core/TextField';
-import clsx from 'clsx';
 import { connect } from 'react-redux'
-import { useStyles } from '../../../Styles/Navbar'
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import {
+    MDBBtn,
+    MDBModalBody,
+    MDBInput,
+    MDBCol
+} from "mdbreact";
 
 const Registeration = ({
     navState: {
@@ -18,66 +15,143 @@ const Registeration = ({
     }
 }) => {
 
-    const classes = useStyles()
+
+
+    const [formData, setFormData] = React.useState({
+        name: '',
+        email: '',
+        password: '',
+        conpassword: ''
+    });
+
+    const { name, email, password, conpassword } = formData;
+
+    const onChange = e => setFormData({
+        ...formData, [e.target.name]: e.target.value
+    });
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        e.target.className += " was-validated";
+    }
+
+    const validateInput = e => {
+        if(e.target.name === 'name'){
+            console.log('====================================');
+            console.log("jjjjjjjjjjjjj");
+            console.log('====================================');
+        }
+    }
 
     return (
-        <main
-            style={{ marginTop: '50px' }}
-            className={clsx(classes.content, {
-                [classes.contentShift]: sidebarOpen,
-            })}
-        >
-                <form className={classes.form} noValidate>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign In
-          </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-              </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
-                    </Grid>
+        <React.Fragment>
+            <MDBModalBody className="animated fadeIn">
+                <form
+                    onSubmit={(e) => submitHandler(e)}
+                    noValidate
+                    className="mx-3 grey-text mb-2 needs-validation"
+                >
+                    <MDBCol>
+                        <MDBInput
+                            label="ປ້ອນຊື່"
+                            icon="user"
+                            group
+                            type="text"
+                            validate
+                            error="wrong"
+                            success="right"
+                            required
+                            name="name"
+                            minLength="8"
+                            maxLength="30"
+                            value={name}
+                            onChange={e => validateInput(e)}
+                            
+                        >
+                            <div className="invalid-feedback">
+                                ກະລຸນາປ້ອນຊື່
+                                </div>
+                            <div className="valid-feedback">
+                                Looks good!
+                                </div>
+                        </MDBInput>
+                    </MDBCol>
+                    <MDBCol>
+                        <MDBInput
+                            label="ປ້ອນອີເມວ"
+                            icon="envelope"
+                            group
+                            type="email"
+                            validate
+                            error="wrong"
+                            success="right"
+                            required
+                            name="email"
+                            value={email}
+                            onChange={e => onChange(e)}
+                        >
+                            <div className="invalid-feedback">
+                                ກະລຸນາປ້ອນອີເມວໃຫ້ຖືກຮູບແບບ <br /> ຕົວຢ່າງ: "example@email.com"
+                                </div>
+                            <div className="valid-feedback">
+                                Looks good!
+                                </div>
+                        </MDBInput>
+                    </MDBCol>
+                    <MDBCol>
+                        <MDBInput
+                            label="ປ້ອນລະຫັດຜ່ານ"
+                            icon="lock"
+                            group
+                            type="password"
+                            validate
+                            required
+                            name="password"
+                            value={password}
+                            onChange={e => onChange(e)}
+                        >
+                            <div className="invalid-feedback">
+                                ລະຫັດຜ່ານຕ້ອງຫຼາຍກວ່າ 8 ໂຕຂື້ນໄປ
+                                                        </div>
+                            <div className="valid-feedback">
+                                Looks good!
+                                </div>
+                        </MDBInput>
+                    </MDBCol>
+                    <MDBCol>
+                        <MDBInput
+                            label="ປ້ອນລະຫັດຜ່ານອີກຄັ້ງ"
+                            icon="exclamation-triangle"
+                            group type="password"
+                            required
+                            validate
+                            name="conpassword"
+                            value={conpassword}
+                            onChange={e => onChange(e)}
+                        >
+                            <div className="invalid-feedback">
+                                ລະຫັດຜ່ານຕ້ອງຫຼາຍກວ່າ 8 ໂຕຂື້ນໄປ
+                                </div>
+                            <div className="valid-feedback">
+                                Looks good!
+                                </div>
+                        </MDBInput>
+                    </MDBCol>
+                    <div className="d-flex justify-content-between flex-wrap">
+                        <div>
+                            <MDBBtn
+                                type="submit"
+                                className="m-0"
+                            >
+                                <Typography>
+                                    ລົງທະບຽນ
+                                    </Typography>
+                            </MDBBtn>
+                        </div>
+                    </div>
                 </form>
-
-        </main>
+            </MDBModalBody>
+        </React.Fragment>
     )
 }
 

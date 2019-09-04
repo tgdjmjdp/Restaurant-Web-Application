@@ -1,18 +1,12 @@
 import React from 'react'
-import clsx from 'clsx';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { useStyles } from '../../Styles/Navbar'
 import Container from '@material-ui/core/Container';
-import Nav from '../Navbar/Navbar'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Rest from './Restaurant/Restaurant'
 
 const Main = () => {
 
     return (
-        <React.Fragment>
-            
+        <React.Fragment>            
             <Container component="main" maxWidth="md">
                 
 

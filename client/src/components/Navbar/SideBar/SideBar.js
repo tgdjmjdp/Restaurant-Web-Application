@@ -2,16 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { useStyles } from '../../../Styles/Navbar'
 import { connect } from 'react-redux'
 import { openSideBar } from '../../../redux/actions/navAction'
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
+import {
+    MDBIcon
+} from "mdbreact";
 
 const SideBar = ({
     openSideBar,
@@ -34,16 +34,16 @@ const SideBar = ({
                 }}
             >
                 <Divider />
-                    <Link to="/restaurant">
-                        <ListItem button>
-                            <ListItemIcon>
-
-                            </ListItemIcon>
-                            <ListItemText>
-                                Click Me
+                <Link to="/restaurant">
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MDBIcon icon="angle-left" />
+                        </ListItemIcon>
+                        <ListItemText>
+                            Click Me
                         </ListItemText>
-                        </ListItem>
-                    </Link>
+                    </ListItem>
+                </Link>
             </Drawer>
         </React.Fragment>
     )
@@ -51,7 +51,7 @@ const SideBar = ({
 
 SideBar.propTypes = {
     openSideBar: PropTypes.func.isRequired,
-    SideBar: PropTypes.object.isRequired,
+    sidebarState: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
