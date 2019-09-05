@@ -4,7 +4,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import { useStyles } from '../../../Styles/Navbar'
 import { connect } from 'react-redux'
-import { openSideBar } from '../../../redux/actions/navAction'
+import { toggleModalAuth, toggleSideNav } from '../../../redux/actions/navAction'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -14,9 +14,10 @@ import {
 } from "mdbreact";
 
 const SideBar = ({
-    openSideBar,
-    sidebarState: {
-        sidebarOpen
+    toggleModalAuth,
+    toggleSideNav,
+    navState: {
+        sideNav
     }
 }) => {
 
@@ -28,14 +29,16 @@ const SideBar = ({
                 className={classes.drawer}
                 variant="persistent"
                 anchor="left"
-                open={sidebarOpen}
+                open={sideNav}
                 classes={{
                     paper: classes.drawerPaper,
                 }}
             >
                 <Divider />
                 <Link to="/restaurant">
-                    <ListItem button>
+                    <ListItem
+                        button
+                        onClick={() => toggleSideNav()}>
                         <ListItemIcon>
                             <MDBIcon icon="angle-left" />
                         </ListItemIcon>
@@ -50,12 +53,13 @@ const SideBar = ({
 }
 
 SideBar.propTypes = {
-    openSideBar: PropTypes.func.isRequired,
-    sidebarState: PropTypes.object.isRequired,
+    navState: PropTypes.object.isRequired,
+    toggleModalAuth: PropTypes.func.isRequired,
+    toggleSideNav: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-    sidebarState: state.navReducer
+    navState: state.navReducer
 })
 
-export default connect(mapStateToProps, { openSideBar })(SideBar)
+export default connect(mapStateToProps, { toggleModalAuth, toggleSideNav })(SideBar)

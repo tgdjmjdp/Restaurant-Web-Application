@@ -1,15 +1,23 @@
-import { OPEN, CLOSE } from '../types/navType';
+import {
+    TOGGLE_SIDENAV,
+    TOGGLE_MODAL_AUTH,
+    TOGGLE_MODAL_FORM
+} from '../types/navType';
 
-export const openSideBar = (open) => dispatch => {
+export const toggleSideNav = () => dispatch => {
+    dispatch({
+        type: TOGGLE_SIDENAV,
+    });
+}
 
-    if (open === false) {
-        dispatch({
-            type: OPEN,
-        });
-    } else {
-        dispatch({
-            type: CLOSE,
-        });
-    }
+export const toggleModalAuth = () => dispatch => {
+    dispatch({
+        type: TOGGLE_MODAL_AUTH,
+    });
+}
 
+export const toggleModalForm = () => dispatch => {
+    dispatch({
+        type: TOGGLE_MODAL_FORM,
+    });
 }

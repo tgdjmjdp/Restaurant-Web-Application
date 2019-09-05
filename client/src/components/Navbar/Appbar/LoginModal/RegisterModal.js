@@ -1,21 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import {
+    toggleModalAuth,
+    toggleSideNav
+} from '../../../../redux/actions/navAction'
 import {
     MDBBtn,
+    MDBModal,
     MDBModalBody,
+    MDBModalHeader,
     MDBInput,
-    MDBCol
+    MDBIcon,
+    MDBCol,
+    MDBAlert,
+
 } from "mdbreact";
 
-const Registeration = ({
-    navState: {
-        sidebarOpen
-    }
+// components
+
+import {
+    fontStyle
+} from '../../../../Styles/font'
+
+const RegisterModal = ({
+
 }) => {
 
-
+    const classes = fontStyle();
 
     const [formData, setFormData] = React.useState({
         name: '',
@@ -30,26 +44,61 @@ const Registeration = ({
         ...formData, [e.target.name]: e.target.value
     });
 
-    const submitHandler = (e) => {
-        e.preventDefault();
-        e.target.className += " was-validated";
-    }
-
-    const validateInput = e => {
-        if(e.target.name === 'name'){
+    const checkEmail = async e => {
+        await onChange(e);
+        const text = e.target.value.includes('@');
+        if (text) {
             console.log('====================================');
-            console.log("jjjjjjjjjjjjj");
+            console.log("YEs");
+            console.log('====================================');
+        } else {
+            console.log('====================================');
+            console.log("NO");
             console.log('====================================');
         }
     }
 
+    const submitHandler = async e => {
+        e.preventDefault();
+        if(e.target.name.value === "qqqqqqqq"){
+            console.log('====================================');
+            console.log("NO");
+            console.log('====================================');
+            const nameAlert = "ຊື່ນີ້ມີຄົນໃຊ້ໄປແລ້ວ"
+        }
+        if (e.target.email.value) {
+            const text = e.target.email.value.includes("@" && ".com");
+            if (!text) {
+                const emailAlert = "ອີເມວຕ້ອງປະກອບດ້ວຍ @ ແລະ .com"
+                return
+            }
+        }
+        if (e.target.password.value !== e.target.conpassword.value) {
+            const passwordAlert = "ກະລຸນາປ້ອນລະຫັດຜ່ານໃຫ້ກົງກັນ";
+        } else {
+            e.target.className += " was-validated";
+        }
+        if ()
+    }
+
     return (
         <React.Fragment>
-            <MDBModalBody className="animated fadeIn">
+            <div className="mx-3 mb-4">
+                <div className="text-center">
+                    <div className="pb-3">
+                        <Avatar style={{ margin: 'auto' }}>
+                            <LockOutlinedIcon />
+                        </Avatar>
+                    </div>
+                    <h5 className={classes.laoFont} >
+                        ລົງທະບຽນສະມາຊິກ
+                    </h5>
+                </div>
                 <form
+                    autoComplete="off"
                     onSubmit={(e) => submitHandler(e)}
                     noValidate
-                    className="mx-3 grey-text mb-2 needs-validation"
+                    className=" grey-text mb-2 needs-validation"
                 >
                     <MDBCol>
                         <MDBInput
@@ -65,8 +114,8 @@ const Registeration = ({
                             minLength="8"
                             maxLength="30"
                             value={name}
-                            onChange={e => validateInput(e)}
-                            
+                            onChange={e => onChange(e)}
+
                         >
                             <div className="invalid-feedback">
                                 ກະລຸນາປ້ອນຊື່
@@ -90,12 +139,11 @@ const Registeration = ({
                             value={email}
                             onChange={e => onChange(e)}
                         >
-                            <div className="invalid-feedback">
-                                ກະລຸນາປ້ອນອີເມວໃຫ້ຖືກຮູບແບບ <br /> ຕົວຢ່າງ: "example@email.com"
-                                </div>
-                            <div className="valid-feedback">
-                                Looks good!
-                                </div>
+                            {
+                                <MDBAlert color="danger">
+
+                                </MDBAlert>
+                            }
                         </MDBInput>
                     </MDBCol>
                     <MDBCol>
@@ -130,32 +178,36 @@ const Registeration = ({
                             onChange={e => onChange(e)}
                         >
                             <div className="invalid-feedback">
-                                ລະຫັດຜ່ານຕ້ອງຫຼາຍກວ່າ 8 ໂຕຂື້ນໄປ
-                                </div>
+                                ລະຫັດຜ່ານຕ້ອງຕືກັນ
+                            </div>
                             <div className="valid-feedback">
                                 Looks good!
-                                </div>
+                            </div>
                         </MDBInput>
                     </MDBCol>
-                    <div className="d-flex justify-content-between flex-wrap">
-                        <div>
-                            <MDBBtn
-                                type="submit"
-                                className="m-0"
-                            >
-                                <Typography>
-                                    ລົງທະບຽນ
-                                    </Typography>
-                            </MDBBtn>
+                    <MDBCol>
+                        <div className="d-flex justify-content-between flex-wrap">
+                            <div>
+                                <MDBBtn
+                                    type="submit"
+                                    className="m-0"
+                                >
+                                    <span>
+                                        ລົງທະບຽນ
+                                </span>
+                                </MDBBtn>
+                            </div>
                         </div>
-                    </div>
+                    </MDBCol>
                 </form>
-            </MDBModalBody>
+            </div>
         </React.Fragment>
     )
 }
 
-Registeration.propTypes = {
+RegisterModal.propTypes = {
+    toggleSideNav: PropTypes.func.isRequired,
+    toggleModalAuth: PropTypes.func.isRequired,
     navState: PropTypes.object.isRequired,
 }
 
@@ -163,4 +215,7 @@ const mapStateToProps = state => ({
     navState: state.navReducer
 })
 
-export default connect(mapStateToProps, {})(Registeration)
+export default connect(mapStateToProps, {
+    toggleSideNav,
+    toggleModalAuth
+})(RegisterModal)
