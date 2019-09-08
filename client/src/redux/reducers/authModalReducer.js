@@ -1,8 +1,8 @@
-import { toggleAuthModal } from '../types/authModalType'
+import { TOGGLE_AUTH_MODAL } from '../types/navType'
 
 const initialState = {
-    loginForm: true,
-    registerForm: false
+    authModal: false,
+    loginForm: true
 }
 
 export default function (state = initialState, action) {
@@ -10,10 +10,10 @@ export default function (state = initialState, action) {
     const { type } = action;
 
     switch (type) {
-        case toggleAuthModal:
+        case TOGGLE_AUTH_MODAL:
             return {
-                loginForm: !loginForm,
-                registerForm: !registerForm
+                ...state,
+                authModal: !loginForm,
             }
         default:
             return state;

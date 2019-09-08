@@ -1,17 +1,13 @@
 import {
     TOGGLE_SIDENAV,
-    TOGGLE_MODAL_AUTH,
-    TOGGLE_LOGIN_MODAL,
-    TOGGLE_REGISTER_MODAL,
-    TOGGLE_MODAL_FORM
+    TOGGLE_AUTH_MODAL,
+    TOGGLE_SWITCH_MODAL
 } from '../types/navType'
 
 const initialState = {
     sideNav: false,
     authModal: false,
-    loginModal: true,
-    registerModal: false,
-    modalForm: false
+    switchModal: false,
 }
 
 export default function (state = initialState, action) {
@@ -24,25 +20,16 @@ export default function (state = initialState, action) {
                 ...state,
                 sideNav: !state.sideNav
             }
-        case TOGGLE_MODAL_AUTH:
+        case TOGGLE_AUTH_MODAL:
             return {
                 ...state,
-                authModal: !state.authModal
+                authModal: !state.authModal,
+                sideNav: false
             }
-        case TOGGLE_LOGIN_MODAL:
+        case TOGGLE_SWITCH_MODAL:
             return {
                 ...state,
-                loginModal: !state.loginModal
-            }
-        case TOGGLE_REGISTER_MODAL:
-            return {
-                ...state,
-                registerModal: !state.registerModal
-            }
-        case TOGGLE_MODAL_FORM:
-            return {
-                ...state,
-                loginModal: !state.loginModal,
+                switchModal: !state.switchModal,
             }
         default:
             return state;

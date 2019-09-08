@@ -1,7 +1,7 @@
 import {
     TOGGLE_SIDENAV,
-    TOGGLE_MODAL_AUTH,
-    TOGGLE_MODAL_FORM
+    TOGGLE_AUTH_MODAL,
+    TOGGLE_SWITCH_MODAL
 } from '../types/navType';
 
 export const toggleSideNav = () => dispatch => {
@@ -10,14 +10,14 @@ export const toggleSideNav = () => dispatch => {
     });
 }
 
-export const toggleModalAuth = () => dispatch => {
+export const toggleAuthModal = () => dispatch => {
     dispatch({
-        type: TOGGLE_MODAL_AUTH,
+        type: TOGGLE_AUTH_MODAL,
     });
 }
 
-export const toggleModalForm = () => dispatch => {
+export const toggleSwitchModal = () => dispatch => {
     dispatch({
-        type: TOGGLE_MODAL_FORM,
+        type: TOGGLE_SWITCH_MODAL,
     });
 }

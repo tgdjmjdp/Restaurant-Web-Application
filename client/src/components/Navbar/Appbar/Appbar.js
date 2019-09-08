@@ -1,27 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { toggleModalAuth, toggleSideNav } from '../../../redux/actions/navAction'
 import { Link } from 'react-router-dom';
 
 import {
     MDBNavbar,
     MDBNavbarBrand,
     MDBNavbarNav,
+    MDBNavItem,
+    MDBNavLink,
 } from "mdbreact";
+
+// functions 
+
+import { toggleSideNav, toggleAuthModal } from '../../../redux/actions/navAction'
 
 // Components
 
 import AuthModalForm from './AuthModalForm'
 
 const Appbar = ({
-    toggleModalAuth,
-    toggleSideNav,
+    toggleAuthModal,
     navState: {
-        sidebarOpen
+        sideNav,
+        authModal
     }
 }) => {
-    
+
     return (
         <React.Fragment>
             <MDBNavbar color="indigo" dark expand="md" fixed="top" scrolling>
@@ -35,21 +40,31 @@ const Appbar = ({
                     </MDBNavbarBrand>
                 </Link>
                 <MDBNavbarNav right>
-                    <AuthModalForm />
+                    <MDBNavItem onClick={() => toggleAuthModal()}>
+                        <MDBNavLink
+                            to="#"
+                            button="true" >
+                            <strong
+                                style={{ fontFamily: "Saysettha OT" }}
+                                className="align-middle">
+                                ເຂົ້າສູ່ລະບົບ
+                            </strong>
+                        </MDBNavLink>
+                    </MDBNavItem>
                 </MDBNavbarNav>
             </MDBNavbar>
+            <AuthModalForm />
         </React.Fragment>
     )
 }
 
 Appbar.propTypes = {
     navState: PropTypes.object.isRequired,
-    toggleModalAuth: PropTypes.func.isRequired,
-    toggleSideNav: PropTypes.func.isRequired,
+    toggleAuthModal: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
     navState: state.navReducer
 })
 
-export default connect(mapStateToProps, { toggleModalAuth, toggleSideNav })(Appbar)
+export default connect(mapStateToProps, { toggleSideNav, toggleAuthModal })(Appbar)

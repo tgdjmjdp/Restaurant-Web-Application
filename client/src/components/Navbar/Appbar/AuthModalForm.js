@@ -21,7 +21,9 @@ import {
 // function
 
 import {
-    toggleSideNav
+    toggleSideNav,
+    toggleAuthModal,
+    toggleSwitchModal
 } from '../../../redux/actions/navAction'
 import {
     fontStyle
@@ -32,14 +34,16 @@ import {
 
 
 const AuthModalForm = ({
-    toggleSideNav
+    toggleAuthModal,
+    toggleSwitchModal,
+    navState: {
+        sideNav,
+        authModal,
+        switchModal
+    }
 }) => {
 
     const classes = fontStyle();
-
-    const [authModal, setAuthModal] = React.useState(false);
-
-    const [loginModal, setLoginModal] = React.useState(true);
 
     const [login, setLogin] = React.useState({
         loginEmail: '',
@@ -87,28 +91,17 @@ const AuthModalForm = ({
 
     return (
         <React.Fragment>
-            <MDBNavItem onClick={() => setAuthModal(!authModal)}>
-                <MDBNavLink
-                    to="#"
-                    button="true" >
-                    <strong
-                        style={{ fontFamily: "Saysettha OT" }}
-                        className="align-middle">
-                        ເຂົ້າສູ່ລະບົບ
-                    </strong>
-                </MDBNavLink>
-            </MDBNavItem>
             <MDBModal
                 className={classes.laoFont}
                 isOpen={authModal}
-                toggle={() => setAuthModal(!authModal)}>
+                toggle={() => toggleAuthModal()}>
                 {
-                    loginModal ? (
+                    switchModal === false ? (
                         <div className="animated fadeIn">
                             <MDBModalHeader
                                 className="text-center border-bottom-0"
                                 titleClass="w-100 font-weight-bold"
-                                toggle={() => setAuthModal(!authModal)}
+                                toggle={() => toggleAuthModal()}
                             >
 
                             </MDBModalHeader>
@@ -126,15 +119,14 @@ const AuthModalForm = ({
                                             </h5>
                                     </div>
                                     <form
+                                        style={{ borderBottom: "1px solid #ced4da" }}
                                         onSubmit={e => submitLogin(e)}
-                                        className={classes.laoFont}
                                         style={{ color: "#2bbbad", padding: "0px" }}
-                                        className=" grey-text mb-2 needs-validation"
+                                        className=" grey-text mb-2 "
                                     >
 
                                         <MDBCol>
                                             <MDBInput
-                                                className="laoFont"
                                                 label="ປ້ອນອີເມວ"
                                                 icon="envelope"
                                                 group
@@ -189,7 +181,7 @@ const AuthModalForm = ({
                                                 </div>
                                                 <div className="mt-3">
                                                     <MDBBtn
-                                                        onClick={() => setLoginModal(!loginModal)}
+                                                        onClick={() => toggleSwitchModal()}
                                                         className="m-0"
                                                     >
                                                         <span className="h6">
@@ -199,7 +191,6 @@ const AuthModalForm = ({
                                                 </div>
                                             </div>
                                         </MDBCol>
-                                    
                                     </form>
                                 </div>
                             </MDBModalBody>
@@ -209,13 +200,13 @@ const AuthModalForm = ({
                                 <MDBModalHeader
                                     className="text-center border-bottom-0"
                                     titleClass="w-100 font-weight-bold"
-                                    toggle={() => setAuthModal(!authModal)}
+                                    toggle={() => toggleAuthModal()}
                                 >
                                     <MDBCol
                                         className="mt-3 animated fadeIn"
                                     >
                                         <MDBBtn
-                                            onClick={() => setLoginModal(!loginModal)}
+                                            onClick={() => toggleSwitchModal()}
                                             className="float-left "
                                         >
                                             <MDBIcon icon="angle-left" />
@@ -234,7 +225,8 @@ const AuthModalForm = ({
                                                 ລົງທະບຽນສະມາຊິກ
                                             </h5>
                                         </div>
-                                        <form
+                                        {/* <form */}
+                                        <div
                                             autoComplete="off"
                                             onSubmit={(e) => submitRegister(e)}
                                             noValidate
@@ -279,11 +271,12 @@ const AuthModalForm = ({
                                                     value={regEmail}
                                                     onChange={e => setRegValue(e)}
                                                 >
-                                                    {
-                                                        <MDBAlert color="danger">
-
-                                                        </MDBAlert>
-                                                    }
+                                                    <div className="invalid-feedback">
+                                                        ກະລຸນາປ້ອນຊື່
+                                                    </div>
+                                                    <div className="valid-feedback">
+                                                        Looks good!
+                                                    </div>
                                                 </MDBInput>
                                             </MDBCol>
                                             <MDBCol>
@@ -339,7 +332,8 @@ const AuthModalForm = ({
                                                     </div>
                                                 </div>
                                             </MDBCol>
-                                        </form>
+                                        </div>
+                                        {/* </form> */}
                                     </div>
                                 </MDBModalBody>
                             </div>
@@ -352,12 +346,16 @@ const AuthModalForm = ({
 
 AuthModalForm.propTypes = {
     toggleSideNav: PropTypes.func.isRequired,
+    navState: PropTypes.object.isRequired,
+    toggleSwitchModal: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-
+    navState: state.navReducer
 })
 
 export default connect(mapStateToProps, {
-    toggleSideNav
+    toggleSideNav, 
+    toggleAuthModal,
+    toggleSwitchModal
 })(AuthModalForm)

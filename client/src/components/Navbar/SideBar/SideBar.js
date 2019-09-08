@@ -4,7 +4,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import { useStyles } from '../../../Styles/Navbar'
 import { connect } from 'react-redux'
-import { toggleModalAuth, toggleSideNav } from '../../../redux/actions/navAction'
+import { toggleSideNav } from '../../../redux/actions/navAction'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -14,7 +14,6 @@ import {
 } from "mdbreact";
 
 const SideBar = ({
-    toggleModalAuth,
     toggleSideNav,
     navState: {
         sideNav
@@ -54,7 +53,6 @@ const SideBar = ({
 
 SideBar.propTypes = {
     navState: PropTypes.object.isRequired,
-    toggleModalAuth: PropTypes.func.isRequired,
     toggleSideNav: PropTypes.func.isRequired,
 }
 
@@ -62,4 +60,4 @@ const mapStateToProps = state => ({
     navState: state.navReducer
 })
 
-export default connect(mapStateToProps, { toggleModalAuth, toggleSideNav })(SideBar)
+export default connect(mapStateToProps, { toggleSideNav })(SideBar)
