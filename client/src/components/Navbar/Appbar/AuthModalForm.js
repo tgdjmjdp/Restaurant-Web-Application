@@ -5,8 +5,6 @@ import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Link } from 'react-router-dom';
 import {
-    MDBNavLink,
-    MDBNavItem,
     MDBModal,
     MDBBtn,
     MDBModalBody,
@@ -14,7 +12,6 @@ import {
     MDBInput,
     MDBIcon,
     MDBCol,
-    MDBAlert,
 
 } from "mdbreact";
 
@@ -25,6 +22,12 @@ import {
     toggleAuthModal,
     toggleSwitchModal
 } from '../../../redux/actions/navAction'
+
+import {
+    registerUser,
+    loginUser
+} from '../../../redux/actions/authAction'
+
 import {
     fontStyle
 } from '../../../Styles/font'
@@ -33,13 +36,20 @@ import {
 
 
 
+// Init
+
 const AuthModalForm = ({
     toggleAuthModal,
     toggleSwitchModal,
+    registerUser,
+    loginUser,
     navState: {
-        sideNav,
         authModal,
         switchModal
+    },
+    authState: {
+        isRegistered,
+        loading,
     }
 }) => {
 
@@ -78,15 +88,23 @@ const AuthModalForm = ({
     });
 
     const submitLogin = e => {
-        console.log('====================================');
-        console.log(e);
-        console.log('====================================');
+        e.preventDefault();
+        loginUser({
+            loginEmail,
+            loginPassword
+        });
     }
 
     const submitRegister = e => {
-        console.log('====================================');
-        console.log(e);
-        console.log('====================================');
+
+        e.preventDefault();
+        if (e.target.regPassword.value === e.target.regConfirm.value) {
+            registerUser({
+                regUsername,
+                regEmail,
+                regPassword
+            })
+        }
     }
 
     return (
@@ -119,7 +137,6 @@ const AuthModalForm = ({
                                             </h5>
                                     </div>
                                     <form
-                                        style={{ borderBottom: "1px solid #ced4da" }}
                                         onSubmit={e => submitLogin(e)}
                                         style={{ color: "#2bbbad", padding: "0px" }}
                                         className=" grey-text mb-2 "
@@ -135,14 +152,12 @@ const AuthModalForm = ({
                                                 error="wrong"
                                                 name="loginEmail"
                                                 value={loginEmail}
-                                                isRequired
                                                 onChange={e => setLoginValue(e)}
                                                 success="right"
                                             />
                                         </MDBCol>
                                         <MDBCol>
                                             <MDBInput
-                                                isRequired
                                                 label="ປ້ອນລະຫັດຜ່ານ"
                                                 icon="lock"
                                                 group
@@ -150,7 +165,6 @@ const AuthModalForm = ({
                                                 name="loginPassword"
                                                 value={loginPassword}
                                                 validate
-                                                name={loginPassword}
                                                 onChange={e => setLoginValue(e)}
                                             />
                                         </MDBCol>
@@ -196,147 +210,178 @@ const AuthModalForm = ({
                             </MDBModalBody>
                         </div>
                     ) : (
-                            <div className="animated fadeIn">
-                                <MDBModalHeader
-                                    className="text-center border-bottom-0"
-                                    titleClass="w-100 font-weight-bold"
-                                    toggle={() => toggleAuthModal()}
-                                >
-                                    <MDBCol
-                                        className="mt-3 animated fadeIn"
-                                    >
-                                        <MDBBtn
-                                            onClick={() => toggleSwitchModal()}
-                                            className="float-left "
-                                        >
-                                            <MDBIcon icon="angle-left" />
-                                        </MDBBtn>
-                                    </MDBCol>
-                                </MDBModalHeader>
-                                <MDBModalBody className="animated fadeIn">
-                                    <div className="mx-3 mb-4">
-                                        <div className="text-center">
-                                            <div className="pb-3">
-                                                <Avatar style={{ margin: 'auto' }}>
-                                                    <LockOutlinedIcon />
-                                                </Avatar>
-                                            </div>
-                                            <h5 className={classes.laoFont} >
-                                                ລົງທະບຽນສະມາຊິກ
-                                            </h5>
-                                        </div>
-                                        {/* <form */}
-                                        <div
-                                            autoComplete="off"
-                                            onSubmit={(e) => submitRegister(e)}
-                                            noValidate
-                                            className=" grey-text mb-2 needs-validation"
-                                        >
-                                            <MDBCol>
-                                                <MDBInput
-                                                    label="ປ້ອນຊື່"
-                                                    icon="user"
-                                                    group
-                                                    type="text"
-                                                    validate
-                                                    error="wrong"
-                                                    success="right"
-                                                    required
-                                                    name="regUsername"
-                                                    minLength="8"
-                                                    maxLength="30"
-                                                    value={regUsername}
-                                                    onChange={e => setRegValue(e)}
 
-                                                >
-                                                    <div className="invalid-feedback">
-                                                        ກະລຸນາປ້ອນຊື່
-                                                    </div>
-                                                    <div className="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                </MDBInput>
-                                            </MDBCol>
-                                            <MDBCol>
-                                                <MDBInput
-                                                    label="ປ້ອນອີເມວ"
-                                                    icon="envelope"
-                                                    group
-                                                    type="email"
-                                                    validate
-                                                    error="wrong"
-                                                    success="right"
-                                                    required
-                                                    name="regEmail"
-                                                    value={regEmail}
-                                                    onChange={e => setRegValue(e)}
-                                                >
-                                                    <div className="invalid-feedback">
-                                                        ກະລຸນາປ້ອນຊື່
-                                                    </div>
-                                                    <div className="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                </MDBInput>
-                                            </MDBCol>
-                                            <MDBCol>
-                                                <MDBInput
-                                                    label="ປ້ອນລະຫັດຜ່ານ"
-                                                    icon="lock"
-                                                    group
-                                                    type="password"
-                                                    validate
-                                                    required
-                                                    name="regPassword"
-                                                    value={regPassword}
-                                                    onChange={e => setRegValue(e)}
-                                                >
-                                                    <div className="invalid-feedback">
-                                                        ລະຫັດຜ່ານຕ້ອງຫຼາຍກວ່າ 8 ໂຕຂື້ນໄປ
-                                                        </div>
-                                                    <div className="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                </MDBInput>
-                                            </MDBCol>
-                                            <MDBCol>
-                                                <MDBInput
-                                                    label="ປ້ອນລະຫັດຜ່ານອີກຄັ້ງ"
-                                                    icon="exclamation-triangle"
-                                                    group type="password"
-                                                    required
-                                                    validate
-                                                    name="regConfirm"
-                                                    value={regConfirm}
-                                                    onChange={e => setRegValue(e)}
-                                                >
-                                                    <div className="invalid-feedback">
-                                                        ລະຫັດຜ່ານຕ້ອງຕືກັນ
-                                                    </div>
-                                                    <div className="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                </MDBInput>
-                                            </MDBCol>
-                                            <MDBCol>
-                                                <div className="d-flex justify-content-between flex-wrap">
-                                                    <div>
-                                                        <MDBBtn
-                                                            type="submit"
-                                                            className="m-0"
-                                                        >
-                                                            <span>
-                                                                ລົງທະບຽນ
-                                                            </span>
-                                                        </MDBBtn>
-                                                    </div>
+                            isRegistered === false ? (
+                                <div className="animated fadeIn">
+                                    <MDBModalHeader
+                                        className="text-center border-bottom-0"
+                                        titleClass="w-100 font-weight-bold"
+                                        toggle={() => toggleAuthModal()}
+                                    >
+                                        <MDBCol
+                                            className="mt-3 animated fadeIn"
+                                        >
+                                            <MDBBtn
+                                                onClick={() => toggleSwitchModal()}
+                                                className="float-left "
+                                            >
+                                                <MDBIcon icon="angle-left" />
+                                            </MDBBtn>
+                                        </MDBCol>
+                                    </MDBModalHeader>
+                                    <MDBModalBody className="animated fadeIn">
+                                        <div className="mx-3 mb-4">
+                                            <div className="text-center">
+                                                <div className="pb-3">
+                                                    <Avatar style={{ margin: 'auto' }}>
+                                                        <LockOutlinedIcon />
+                                                    </Avatar>
                                                 </div>
-                                            </MDBCol>
+                                                <h5 className={classes.laoFont} >
+                                                    ລົງທະບຽນສະມາຊິກ
+                                            </h5>
+                                            </div>
+                                            <form
+                                                autoComplete="off"
+                                                onSubmit={(e) => submitRegister(e)}
+                                                noValidate
+                                                className=" grey-text mb-2 needs-validation"
+                                            >
+                                                <MDBCol>
+                                                    <MDBInput
+                                                        label="ປ້ອນຊື່"
+                                                        icon="user"
+                                                        group
+                                                        type="text"
+                                                        validate
+                                                        error="wrong"
+                                                        success="right"
+                                                        required
+                                                        name="regUsername"
+                                                        minLength="8"
+                                                        maxLength="30"
+                                                        value={regUsername}
+                                                        onChange={e => setRegValue(e)}
+
+                                                    >
+                                                        <div className="invalid-feedback">
+                                                            ກະລຸນາປ້ອນຊື່
+                                                    </div>
+                                                        <div className="valid-feedback">
+                                                            Looks good!
+                                                    </div>
+                                                    </MDBInput>
+                                                </MDBCol>
+                                                <MDBCol>
+                                                    <MDBInput
+                                                        label="ປ້ອນອີເມວ"
+                                                        icon="envelope"
+                                                        group
+                                                        type="email"
+                                                        validate
+                                                        error="wrong"
+                                                        success="right"
+                                                        required
+                                                        name="regEmail"
+                                                        value={regEmail}
+                                                        onChange={e => setRegValue(e)}
+                                                    >
+                                                        <div className="invalid-feedback">
+                                                            ກະລຸນາປ້ອນຊື່
+                                                    </div>
+                                                        <div className="valid-feedback">
+                                                            Looks good!
+                                                    </div>
+                                                    </MDBInput>
+                                                </MDBCol>
+                                                <MDBCol>
+                                                    <MDBInput
+                                                        label="ປ້ອນລະຫັດຜ່ານ"
+                                                        icon="lock"
+                                                        group
+                                                        type="password"
+                                                        validate
+                                                        required
+                                                        name="regPassword"
+                                                        value={regPassword}
+                                                        onChange={e => setRegValue(e)}
+                                                    >
+                                                        <div className="invalid-feedback">
+                                                            ລະຫັດຜ່ານຕ້ອງຫຼາຍກວ່າ 8 ໂຕຂື້ນໄປ
+                                                        </div>
+                                                        <div className="valid-feedback">
+                                                            Looks good!
+                                                    </div>
+                                                    </MDBInput>
+                                                </MDBCol>
+                                                <MDBCol>
+                                                    <MDBInput
+                                                        label="ປ້ອນລະຫັດຜ່ານອີກຄັ້ງ"
+                                                        icon="exclamation-triangle"
+                                                        group type="password"
+                                                        required
+                                                        validate
+                                                        name="regConfirm"
+                                                        value={regConfirm}
+                                                        onChange={e => setRegValue(e)}
+                                                    >
+                                                        <div className="invalid-feedback">
+                                                            ລະຫັດຜ່ານຕ້ອງຕືກັນ
+                                                    </div>
+                                                        <div className="valid-feedback">
+                                                            Looks good!
+                                                    </div>
+                                                    </MDBInput>
+                                                </MDBCol>
+                                                <MDBCol>
+                                                    <div className="d-flex justify-content-between flex-wrap">
+                                                        <div>
+                                                            <MDBBtn
+                                                                type="submit"
+                                                                className="m-0"
+                                                            >
+                                                                <span>
+                                                                    ລົງທະບຽນ
+                                                            </span>
+                                                            </MDBBtn>
+                                                        </div>
+                                                    </div>
+                                                </MDBCol>
+                                            </form>
                                         </div>
-                                        {/* </form> */}
+                                    </MDBModalBody>
+                                </div>
+                            ) : (
+                                    <div className="animated fadeIn">
+                                        <MDBModalHeader
+                                            className="text-center border-bottom-0"
+                                            titleClass="w-100 font-weight-bold"
+                                            toggle={() => toggleAuthModal()}
+                                        >
+                                        </MDBModalHeader>
+                                        <MDBModalBody className="animated fadeIn">
+                                            <div className="mx-3 mb-4">
+                                                <div className="text-center my-5">
+                                                    <h1>ສຳເລັດ</h1>
+                                                </div>
+                                                <MDBCol>
+                                                    <div className="d-flex justify-content-center flex-wrap">
+                                                        <div className="mt-5 ">
+                                                            <MDBBtn
+                                                                className="m-0"
+                                                                onClick={() => toggleSwitchModal()}
+                                                            >
+                                                                <span className="h6">
+                                                                    ເຂົ້າສູ່ລະບົບ
+                                                                </span>
+                                                            </MDBBtn>
+                                                        </div>
+                                                    </div>
+                                                </MDBCol>
+                                            </div>
+                                        </MDBModalBody>
                                     </div>
-                                </MDBModalBody>
-                            </div>
+                                )
                         )
                 }
             </MDBModal>
@@ -346,16 +391,22 @@ const AuthModalForm = ({
 
 AuthModalForm.propTypes = {
     toggleSideNav: PropTypes.func.isRequired,
-    navState: PropTypes.object.isRequired,
     toggleSwitchModal: PropTypes.func.isRequired,
+    registerUser: PropTypes.func.isRequired,
+    loginUser: PropTypes.func.isRequired,
+    navState: PropTypes.object.isRequired,
+    authState: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
-    navState: state.navReducer
+    navState: state.navReducer,
+    authState: state.authReducer
 })
 
 export default connect(mapStateToProps, {
-    toggleSideNav, 
+    toggleSideNav,
     toggleAuthModal,
-    toggleSwitchModal
+    toggleSwitchModal,
+    registerUser,
+    loginUser
 })(AuthModalForm)

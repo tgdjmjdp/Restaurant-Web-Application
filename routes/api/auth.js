@@ -4,8 +4,12 @@ const router = express.Router();
 const UserModel = require('../../models/userModel');
 const AuthMiddleware = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
+const gravatar = require('gravatar');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const config = require('config');
 
-router.get('/', async (req, res) => {
+router.get('/', AuthMiddleware, async (req, res) => {
 
     try {
         const user = await User.findById(req.user.id).select('-password');
@@ -17,11 +21,77 @@ router.get('/', async (req, res) => {
 
 });
 
+router.post('/', [
+
+    check('loginEmail', 'Please include a valid email').isEmail(),
+    check('loginPassword', 'Password is required').exists()
+
+], async (req, res) => {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { loginEmail, loginPassword } = req.body;
+
+    try {
+
+        let user = await User.findOne({ "email": loginEmail });
+
+        console.log('====================================');
+        console.log(user._id);
+        console.log('====================================');
+
+        if (!user) {
+
+            console.log('====================================');
+            console.log('no user');
+            console.log('====================================');
+
+            return res
+                .status(400)
+                .json({ errors: [{ msg: 'Invalid Credentials' }] });
+        }
+
+        const isMatch = await bcrypt.compare(loginPassword, user.password);
+
+        if (!isMatch) {
+            console.log('====================================');
+            console.log('password not match');
+            console.log('====================================');
+            return res
+                .status(400)
+                .json({ errors: [{ msg: 'Invalid Credentials' }] });
+        }
+
+        const payload = {
+            user: {
+                id: user._id
+            }
+        };
+
+        jwt.sign(
+            payload,
+            config.get('jwtToken'),
+            { expiresIn: 360000 },
+            (err, token) => {
+                if (err) throw err;
+                res.json({ token });
+            }
+        );
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
 router.post('/register', [
 
-    check('name', 'name is required').not().isEmpty(),
-    check('email', "please include a valid email").isEmail(),
-    check('password', 'password must contain atleast 6 or more charaters').isLength({ min: 6 })
+    check('regUsername', 'name is required').not().isEmpty(),
+    check('regEmail', "please include a valid email").isEmail(),
+    check('regPassword', 'password must contain atleast 6 or more charaters').isLength({ min: 6 })
 
 ], async (req, res) => {
 
@@ -32,14 +102,14 @@ router.post('/register', [
     }
 
     const {
-        name,
-        email,
-        password
+        regUsername,
+        regEmail,
+        regPassword
     } = req.body
 
     try {
 
-        let user = await UserModel.findOne({ "name": name });
+        let user = await UserModel.findOne({ "name": regUsername });
 
         if (user) {
 
@@ -55,22 +125,22 @@ router.post('/register', [
 
         }
 
-        const avatar = gravatar.url(email, {
+        const avatar = gravatar.url(regEmail, {
             s: '200',
             r: 'pg',
             d: 'mm'
         });
 
         user = new User({
-            name,
-            email,
-            password,
+            name: regUsername,
+            email: regEmail,
+            password: regPassword,
             avatar
         });
 
         const salt = await bcrypt.genSalt(10);
 
-        user.password = await bcrypt.hash(password, salt);
+        user.password = await bcrypt.hash(regPassword, salt);
 
         console.log(user);
 
@@ -82,13 +152,17 @@ router.post('/register', [
             console.log('====================================');
         }
 
-        const payload = {
+        res.json({ user });
+
+        /* const payload = {
             user: {
                 id: user.id
             }
-        }
+        } */
 
-        jwt.sign(payload, config.get('jwtToken'), { expiresIn: 360000 }, (error, token) => {
+
+
+        /* jwt.sign(payload, 'secret token', { expiresIn: 360000 }, (error, token) => {
             if (error) throw error;
             res.json({ token });
             console.log('====================================');
@@ -96,11 +170,11 @@ router.post('/register', [
             console.log('====================================');
             console.log(token);
             console.log('====================================');
-        });
+        }); */
 
     } catch (error) {
         console.log(error.message);
-        res.status(500).send('Server Error');
+        res.status(500).send(error.message);
     }
 
 })

@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
-import navReducer from './navReducer'
+import navReducer from './navReducer';
+import authReducer from './authReducer';
 export default combineReducers({
-    navReducer
+    navReducer,
+    authReducer
 });
