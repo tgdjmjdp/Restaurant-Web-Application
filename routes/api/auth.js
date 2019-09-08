@@ -11,7 +11,13 @@ const config = require('config');
 
 router.get('/', AuthMiddleware, async (req, res) => {
 
+    
+    console.log('====================================');
+    console.log(req.user.id);
+    console.log('====================================');
+
     try {
+
         const user = await User.findById(req.user.id).select('-password');
         res.json(user);
     } catch (error) {
@@ -38,10 +44,6 @@ router.post('/', [
     try {
 
         let user = await User.findOne({ "email": loginEmail });
-
-        console.log('====================================');
-        console.log(user._id);
-        console.log('====================================');
 
         if (!user) {
 
@@ -76,7 +78,6 @@ router.post('/', [
             config.get('jwtToken'),
             { expiresIn: 360000 },
             (err, token) => {
-                if (err) throw err;
                 res.json({ token });
             }
         );

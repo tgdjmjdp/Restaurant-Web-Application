@@ -8,6 +8,7 @@ import {
 } from '../types/navType';
 
 const initialState = {
+    token: localStorage.getItem('token'),
     isLogin: false,
     isRegistered: false,
 }
@@ -16,6 +17,7 @@ export default function (state = initialState, action) {
 
     switch (action.type) {
         case LOGIN_SUCCESS:
+            localStorage.setItem('token', action.payload.token);
             return {
                 isRegistered: false,
                 isLogin: true

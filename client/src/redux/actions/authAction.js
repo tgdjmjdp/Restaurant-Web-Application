@@ -63,9 +63,11 @@ export const loadUser = () => async dispatch => {
         console.log("has token");
 
     } else {
+
         console.log('====================================');
         console.log("no token");
         console.log('====================================');
+
     }
 
     try {
@@ -101,14 +103,14 @@ export const loginUser = ({ loginEmail, loginPassword }) => async dispatch => {
 
     }
 
-    console.log('============== LOGIN ======================');
-    console.log(loginEmail);
-    console.log('====================================');
+    
 
     const body = JSON.stringify({ loginEmail, loginPassword });
 
     try {
-
+        console.log('============== LOGIN ======================');
+        console.log("HERE");
+        console.log('====================================');
         const res = await axios.post('http://localhost:5000/api/auth/', body, config);
 
         dispatch({

@@ -2,7 +2,13 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 
 module.exports = function (req, res, next) {
+
+    console.log('====================================');
+    console.log("NIDDLE WARE ");
+    console.log('====================================');
+    
     const token = req.header('x-auth-token');
+
     if (!token) {
         return res.status(401).json({
             msg: 'No token, authorization denied'
@@ -19,4 +25,5 @@ module.exports = function (req, res, next) {
             msg: 'Token is not valid'
         });
     }
+    
 };
