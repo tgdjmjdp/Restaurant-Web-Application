@@ -13,6 +13,7 @@ router.get('/', AuthMiddleware, async (req, res) => {
 
     
     console.log('====================================');
+    console.log("AUTH MIDDLE WARE");
     console.log(req.user.id);
     console.log('====================================');
 
@@ -59,12 +60,14 @@ router.post('/', [
         const isMatch = await bcrypt.compare(loginPassword, user.password);
 
         if (!isMatch) {
+
             console.log('====================================');
             console.log('password not match');
             console.log('====================================');
             return res
                 .status(400)
                 .json({ errors: [{ msg: 'Invalid Credentials' }] });
+
         }
 
         const payload = {
@@ -78,6 +81,9 @@ router.post('/', [
             config.get('jwtToken'),
             { expiresIn: 360000 },
             (err, token) => {
+                console.log('====================================');
+                console.log(err);
+                console.log('====================================');
                 res.json({ token });
             }
         );
