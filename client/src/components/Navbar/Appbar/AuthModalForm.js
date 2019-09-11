@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {
     MDBModal,
     MDBBtn,
@@ -49,9 +49,11 @@ const AuthModalForm = ({
     },
     authState: {
         isRegistered,
-        loading,
+        isLogin
     }
 }) => {
+
+    
 
     const classes = fontStyle();
 
@@ -106,7 +108,11 @@ const AuthModalForm = ({
             })
         }
     }
-
+    if(isLogin === true){
+        return <Redirect to='/' />
+    }else{
+        
+    }
     return (
         <React.Fragment>
             <MDBModal

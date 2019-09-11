@@ -4,6 +4,10 @@ import {
     TOGGLE_SWITCH_MODAL
 } from '../types/navType'
 
+import {
+    USER_LOADED
+} from '../types/authType'
+
 const initialState = {
     sideNav: false,
     authModal: false,
@@ -12,13 +16,17 @@ const initialState = {
 
 export default function (state = initialState, action) {
 
-    const { type } = action;
-
-    switch (type) {
+    switch (action.type) {
         case TOGGLE_SIDENAV:
             return {
                 ...state,
                 sideNav: !state.sideNav
+            }
+        case USER_LOADED:
+            return {
+                ...state,
+                authModal: false,
+                switchModal: false,
             }
         case TOGGLE_AUTH_MODAL:
             return {

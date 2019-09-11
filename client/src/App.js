@@ -5,9 +5,19 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import Home from './components/Main/Home/Home'
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { loadUser } from './redux/actions/authAction'
+import setAuthToken from './utils/setAuthToken'
 import './App.css'
 
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
 const App = () => {
+  React.useEffect(() => {
+    store.dispatch(loadUser());
+
+  }, []);
 
   return (
     <Provider store={store}>

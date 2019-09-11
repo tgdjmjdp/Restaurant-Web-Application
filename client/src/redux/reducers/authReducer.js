@@ -2,11 +2,12 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     REGISTER_SUCCESS,
-    USER_LOADED
+    USER_LOADED,
+    LOGOUT,
 } from '../types/authType';
 
 import {
-    TOGGLE_SWITCH_MODAL
+    TOGGLE_SWITCH_MODAL,
 } from '../types/navType';
 
 const initialState = {
@@ -21,7 +22,7 @@ export default function (state = initialState, action) {
         case USER_LOADED:
             return {
                 ...state,
-                isAuthenicated: true,
+                isLogin: true,
             }
         case LOGIN_SUCCESS:
             localStorage.setItem('token', action.payload.token);
@@ -45,6 +46,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 isRegistered: false
+            }
+        case LOGOUT:
+            localStorage.removeItem('token');
+            return {
+                ...state,
+                token: null,
+                isLogin: false,
             }
         default:
             return state;

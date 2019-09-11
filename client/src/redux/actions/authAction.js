@@ -4,7 +4,9 @@ import {
     LOGIN_SUCCESS,
     USER_LOADED,
     AUTH_ERROR,
-    LOGIN_FAIL
+    LOGIN_FAIL,
+    CLEAR_PROFILE,
+    LOGOUT
 } from '../types/authType'
 
 import setAuthToken from '../../utils/setAuthToken'
@@ -27,7 +29,7 @@ export const registerUser = ({
 
         const body = JSON.stringify({ regUsername, regEmail, regPassword });
 
-        const res = await axios.post('http://localhost:5000/api/auth/register', body, config);
+        await axios.post('http://localhost:5000/api/auth/register', body, config);
 
         dispatch({
             type: REGISTER_SUCCESS
@@ -62,7 +64,7 @@ export const loadUser = () => async dispatch => {
     }
 
     try {
-        const res = await axios.get('/api/auth/');
+        await axios.get('/api/auth/');
         
         dispatch({
             type: USER_LOADED,
@@ -118,12 +120,19 @@ export const loginUser = ({ loginEmail, loginPassword }) => async dispatch => {
     }
 }
 
-/* export const logout = () => dispatch => {
-    dispatch({ type: LOGOUT });
-    const clear = dispatch({ type: CLEAR_PROFILE });
+export const logoutUser = () => dispatch => {
+
+    dispatch({ 
+        type: LOGOUT 
+    });
+
+    const clear = dispatch({ 
+        type: CLEAR_PROFILE 
+    });
+
     if (clear){
         console.log('====================================');
         console.log("CLEAR PROFILE");
         console.log('====================================');
     }
-} */
+}
