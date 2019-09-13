@@ -21,16 +21,16 @@ import {
     toggleSideNav,
     toggleAuthModal,
     toggleSwitchModal
-} from '../../../redux/actions/navAction'
+} from '../../redux/actions/navAction'
 
 import {
     registerUser,
     loginUser
-} from '../../../redux/actions/authAction'
+} from '../../redux/actions/authAction'
 
 import {
     fontStyle
-} from '../../../Styles/font'
+} from '../../Styles/font'
 
 // components
 

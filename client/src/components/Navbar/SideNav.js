@@ -19,8 +19,8 @@ import {
     MDBIcon
 } from "mdbreact";
 
-import { toggleSideNav } from '../../../redux/actions/navAction'
-import { useStyles } from '../../../Styles/Navbar'
+import { toggleSideNav } from '../../redux/actions/navAction'
+import { useStyles } from '../../Styles/Navbar'
 
 const SideNav = ({
     toggleSideNav,

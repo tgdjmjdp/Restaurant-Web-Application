@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Nav from './components/Navbar/Navbar'
+
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import Home from './components/Main/Home/Home'
@@ -12,30 +12,30 @@ import './App.css'
 // Components
 
 import RestCreate from './components/Restaurant/RestCreate';
-import One from './components/Main/One'
-import Two from './components/Main/Two'
+import SideNav from './components/Navbar/SideNav'
+import Appbar from './components/Navbar/Appbar'
+import Login from './components/Auth/Login'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
 const App = () => {
+
   React.useEffect(() => {
     store.dispatch(loadUser());
-
   }, []);
 
   return (
     <Provider store={store}>
       <Router>
         <CssBaseline />
-        <Nav />
+        <Appbar />
+        <SideNav />
         <div className="pt-5">
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/one" component={One} />
-            <Route exact path="/two" component={Two} />
-            <Route exact path="/resturant" component={Home} />
+            <Route exact path="/login" component={Login} />
             <Route exact path="/restaurant/create" component={RestCreate} />
           </Switch>
         </div>

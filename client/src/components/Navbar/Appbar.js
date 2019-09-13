@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { fontStyle } from '../../../Styles/font'
+import { fontStyle } from '../../Styles/font'
 import Toolbar from '@material-ui/core/Toolbar';
 import {
     MDBNavbar,
@@ -29,11 +29,11 @@ import {
 import {
     toggleSideNav,
     toggleAuthModal
-} from '../../../redux/actions/navAction'
+} from '../../redux/actions/navAction'
 
 import {
     logoutUser
-} from '../../../redux/actions/authAction'
+} from '../../redux/actions/authAction'
 
 // Components
 
@@ -243,8 +243,7 @@ const Appbar = ({
                     </MDBModalBody>
                 </div>
             </MDBModal>
-            <AuthModalForm />
-
+            {/* <AuthModalForm /> */}
         </React.Fragment >
     )
 }
