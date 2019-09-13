@@ -38,7 +38,6 @@ import {
 // Components
 
 import AuthModalForm from './AuthModalForm'
-import SideNav from './SideNav'
 
 const Appbar = ({
     toggleAuthModal,
@@ -49,7 +48,8 @@ const Appbar = ({
         authModal
     },
     authState: {
-        isLogin
+        isLogin,
+        user
     }
 }) => {
 
@@ -71,7 +71,7 @@ const Appbar = ({
     return (
         <React.Fragment>
             <MDBNavbar
-                className="pt-0 pb-0 purple-gradient"
+                className="pt-0 pb-0 grey "
                 color="indigo"
                 dark
                 expand="sm"
@@ -111,30 +111,86 @@ const Appbar = ({
                                     </MDBNavLink>
                                 </MDBNavItem>
                             ) : (
-                                    <MDBNavItem>
-                                        <MDBDropdown>
-                                            <MDBDropdownToggle nav caret color="primary">
-                                                USER
-                                            </MDBDropdownToggle>
-                                            <MDBDropdownMenu basic>
-                                                <MDBDropdownItem>Action</MDBDropdownItem>
-                                                <MDBDropdownItem>Another Action</MDBDropdownItem>
-                                                <MDBDropdownItem
-                                                    onClick={() => toggleSideNav()}
+                                    <React.Fragment>
+                                        <MDBNavItem>
+                                            <MDBDropdown>
+                                                <MDBDropdownToggle
+                                                    className=""
+                                                    nav
+                                                    color="primary"
                                                 >
-                                                    Something else here
+                                                    <div className=" p-1" >
+                                                        <MDBIcon size="2x" icon="bell" />
+                                                    </div>
+                                                </MDBDropdownToggle>
+                                                <MDBDropdownMenu basic>
+                                                    <MDBDropdownItem>
+                                                        <span style={{ fontFamily: "Saysettha OT" }} className="">
+                                                            ແຈ້ງເຕືອນ
+                                                        </span>
                                                     </MDBDropdownItem>
-                                                <MDBDropdownItem divider />
-                                                <MDBDropdownItem
-                                                    onClick={() => setLogoutModal(!logoutModal)}
-                                                    style={{ fontFamily: "Saysettha OT" }}
-                                                    className="align-middle"
+                                                    <MDBDropdownItem divider />
+                                                    <MDBDropdownItem
+                                                        style={{ fontFamily: "Saysettha OT" }}
+                                                        className="align-middle"
+                                                    >
+                                                        <Link to="/restaurant/create" >
+                                                            ເພີ່ມຮ້ານອາຫານ
+                                                        </Link>
+                                                    </MDBDropdownItem>
+                                                </MDBDropdownMenu>
+                                            </MDBDropdown>
+                                        </MDBNavItem>
+                                        <MDBNavItem>
+                                            <MDBDropdown>
+                                                <MDBDropdownToggle
+                                                    className=""
+                                                    nav
+                                                    color="primary"
                                                 >
-                                                    ອອຈາກລະບົບ
+                                                    <div className=" p-1" >
+                                                        <MDBIcon size="2x" icon="home" />
+                                                    </div>
+                                                </MDBDropdownToggle>
+                                                <MDBDropdownMenu basic>
+                                                    <MDBDropdownItem>
+                                                        <span style={{ fontFamily: "Saysettha OT" }} className="">
+                                                            ໂປຣໄຟລ໌XXXXXXXX
+                                                        </span>
+                                                    </MDBDropdownItem>
+                                                    <MDBDropdownItem divider />
+                                                    <MDBDropdownItem style={{ fontFamily: "Saysettha OT" }} >
+                                                        <Link to="/restaurant/create" >
+                                                            ເພີ່ມຮ້ານອາຫານ
+                                                        </Link>
+                                                    </MDBDropdownItem>
+                                                </MDBDropdownMenu>
+                                            </MDBDropdown>
+                                        </MDBNavItem>
+                                        <MDBNavItem>
+                                            <MDBDropdown>
+                                                <MDBDropdownToggle nav caret color="primary">
+                                                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" className="rounded-circle z-depth-0"
+                                                        style={{ height: "35px", padding: 0 }} alt="" />
+                                                </MDBDropdownToggle>
+                                                <MDBDropdownMenu basic>
+                                                    <MDBDropdownItem>
+                                                        <span style={{ fontFamily: "Saysettha OT" }} className="">
+                                                            ໂປຣໄຟລ໌
+                                                    </span>
+                                                    </MDBDropdownItem>
+                                                    <MDBDropdownItem divider />
+                                                    <MDBDropdownItem
+                                                        onClick={() => setLogoutModal(!logoutModal)}
+                                                        style={{ fontFamily: "Saysettha OT" }}
+                                                        className="align-middle"
+                                                    >
+                                                        ອອຈາກລະບົບ
                                                 </MDBDropdownItem>
-                                            </MDBDropdownMenu>
-                                        </MDBDropdown>
-                                    </MDBNavItem>
+                                                </MDBDropdownMenu>
+                                            </MDBDropdown>
+                                        </MDBNavItem>
+                                    </React.Fragment>
                                 )
                         }
                     </MDBNavbarNav>
@@ -187,6 +243,8 @@ const Appbar = ({
                     </MDBModalBody>
                 </div>
             </MDBModal>
+            <AuthModalForm />
+
         </React.Fragment >
     )
 }

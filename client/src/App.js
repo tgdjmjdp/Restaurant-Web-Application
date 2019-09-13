@@ -9,6 +9,12 @@ import { loadUser } from './redux/actions/authAction'
 import setAuthToken from './utils/setAuthToken'
 import './App.css'
 
+// Components
+
+import RestCreate from './components/Restaurant/RestCreate';
+import One from './components/Main/One'
+import Two from './components/Main/Two'
+
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -22,11 +28,15 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <div className="App">
-          <CssBaseline />
-          <Nav />
+        <CssBaseline />
+        <Nav />
+        <div className="pt-5">
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/one" component={One} />
+            <Route exact path="/two" component={Two} />
+            <Route exact path="/resturant" component={Home} />
+            <Route exact path="/restaurant/create" component={RestCreate} />
           </Switch>
         </div>
       </Router>

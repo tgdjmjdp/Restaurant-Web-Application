@@ -14,6 +14,7 @@ const initialState = {
     token: localStorage.getItem('token'),
     isLogin: false,
     isRegistered: false,
+    user: null,
 }
 
 export default function (state = initialState, action) {
@@ -22,6 +23,7 @@ export default function (state = initialState, action) {
         case USER_LOADED:
             return {
                 ...state,
+                user: action.payload,
                 isLogin: true,
             }
         case LOGIN_SUCCESS:
