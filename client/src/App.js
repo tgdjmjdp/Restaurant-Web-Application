@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { Provider } from 'react-redux'
@@ -14,7 +14,6 @@ import './App.css'
 import RestCreate from './components/Restaurant/RestCreate';
 import SideNav from './components/Navbar/SideNav'
 import Appbar from './components/Navbar/Appbar'
-import Login from './components/Auth/Login'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -22,23 +21,26 @@ if (localStorage.token) {
 
 const App = () => {
 
-  React.useEffect(() => {
+  useEffect(() => {
     store.dispatch(loadUser());
   }, []);
 
   return (
     <Provider store={store}>
       <Router>
-        <CssBaseline />
-        <Appbar />
-        <SideNav />
-        <div className="pt-5">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/restaurant/create" component={RestCreate} />
-          </Switch>
-        </div>
+        <React.Fragment>
+          <CssBaseline />
+
+          <Appbar />
+          <SideNav />
+
+          <div className="pt-5">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/restaurant/create" component={RestCreate} />
+            </Switch>
+          </div>
+        </React.Fragment>
       </Router>
     </Provider>
   )

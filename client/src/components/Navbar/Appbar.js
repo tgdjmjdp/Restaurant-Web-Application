@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { fontStyle } from '../../Styles/font'
-import Toolbar from '@material-ui/core/Toolbar';
 import {
     MDBNavbar,
     MDBNavbarBrand,
@@ -49,9 +48,16 @@ const Appbar = ({
     },
     authState: {
         isLogin,
-        user
+        userData
     }
 }) => {
+
+
+    if (userData !== null) {
+        console.log('====================================');
+        console.log(userData);
+        console.log('====================================');
+    }
 
     const classes = fontStyle();
 
@@ -243,7 +249,7 @@ const Appbar = ({
                     </MDBModalBody>
                 </div>
             </MDBModal>
-            {/* <AuthModalForm /> */}
+            <AuthModalForm />
         </React.Fragment >
     )
 }

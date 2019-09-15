@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 // MDB
 
@@ -13,13 +12,18 @@ import {
 const RestCreate = props => {
     return (
         <React.Fragment>
-            <MDBRow>
-                <MDBCol md="6">
+            <MDBRow className="h-100">
+                <MDBCol md="6" className="mx-auto  ">
                     <MDBContainer
+                        className="grey lighten-5 p-5"
                         header="Material input groups"
                         description="Material Design styling for Bootstrap Input Group component"
                     >
-                        <MDBInputGroup material containerClassName="mb-3 mt-0" prepend="@" hint="Username" />
+                        <MDBInputGroup
+                            material
+                            containerClassName="mb-3 mt-0"
+                            prepend="@"
+                            hint="Username" />
                         <MDBInputGroup
                             material
                             hint="Recipient's username"
@@ -34,8 +38,18 @@ const RestCreate = props => {
                             prepend="https://example.com/users/"
                             id="basic-url-material"
                         />
-                        <MDBInputGroup material containerClassName="mb-3" prepend="$" append=".00" />
-                        <MDBInputGroup material className="mb-0" prepend="With textarea" type="textarea" />
+                        <MDBInputGroup
+                            material
+                            containerClassName="mb-3"
+                            prepend="$"
+                            append=".00"
+                        />
+                        <MDBInputGroup
+                            material
+                            className="mb-0"
+                            prepend="With textarea"
+                            type="textarea"
+                        />
                     </MDBContainer>
                 </MDBCol>
             </MDBRow>

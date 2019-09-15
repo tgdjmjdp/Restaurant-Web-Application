@@ -8,16 +8,12 @@ import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
 import List from '@material-ui/core/List';
-import IconButton from '@material-ui/core/IconButton';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import RoomServiceIcon from '@material-ui/icons/RoomService';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import SearchIcon from '@material-ui/icons/Search';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import {
-    MDBIcon
-} from "mdbreact";
 
 import { toggleSideNav } from '../../redux/actions/navAction'
 import { useStyles } from '../../Styles/Navbar'

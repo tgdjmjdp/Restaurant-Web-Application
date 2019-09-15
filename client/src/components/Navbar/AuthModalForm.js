@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
     MDBModal,
     MDBBtn,
@@ -108,11 +108,12 @@ const AuthModalForm = ({
             })
         }
     }
+    /* 
     if(isLogin === true){
         return <Redirect to='/' />
     }else{
         
-    }
+    } */
     return (
         <React.Fragment>
             <MDBModal

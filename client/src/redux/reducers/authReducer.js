@@ -14,21 +14,25 @@ const initialState = {
     token: localStorage.getItem('token'),
     isLogin: false,
     isRegistered: false,
-    user: null,
+    userData: null,
 }
 
 export default function (state = initialState, action) {
 
-    switch (action.type) {
+    const { type, payload } = action;
+
+    switch (type) {
         case USER_LOADED:
+            console.log("HAHA");
             return {
                 ...state,
-                user: action.payload,
+                userData: payload,
                 isLogin: true,
             }
         case LOGIN_SUCCESS:
-            localStorage.setItem('token', action.payload.token);
+            localStorage.setItem('token', payload.token);
             return {
+                ...state,
                 isRegistered: false,
                 isLogin: true
             }

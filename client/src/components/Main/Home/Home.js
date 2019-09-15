@@ -16,7 +16,6 @@ const Home = ({
     return (
         <React.Fragment>
             <main
-                style={{ marginTop: '50px' }}
                 className={clsx(classes.content, {
                     [classes.contentShift]: sidebarOpen,
                 })} >
