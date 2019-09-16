@@ -29,7 +29,7 @@ export const registerUser = ({
 
         const body = JSON.stringify({ regUsername, regEmail, regPassword });
 
-        await axios.post('http://localhost:5000/api/auth/register', body, config);
+        await axios.post('/api/auth/register', body, config);
 
         dispatch({
             type: REGISTER_SUCCESS,

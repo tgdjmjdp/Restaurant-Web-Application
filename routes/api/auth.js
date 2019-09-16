@@ -13,13 +13,12 @@ router.get('/', AuthMiddleware, async (req, res) => {
 
     
     console.log('====================================');
-    console.log("AUTH MIDDLE WARE");
     console.log(req.user.id);
     console.log('====================================');
 
     try {
 
-        const user = await User.findById(req.user.id).select('-password');
+        const user = await UserModel.findById(req.user.id).select('-password');
         res.json(user);
     } catch (error) {
         console.log(error.message);
@@ -44,13 +43,9 @@ router.post('/', [
 
     try {
 
-        let user = await User.findOne({ "email": loginEmail });
+        let user = await UserModel.findOne({ "email": loginEmail });
 
         if (!user) {
-
-            console.log('====================================');
-            console.log('no user');
-            console.log('====================================');
 
             return res
                 .status(400)
@@ -138,7 +133,7 @@ router.post('/register', [
             d: 'mm'
         });
 
-        user = new User({
+        user = new UserModel({
             name: regUsername,
             email: regEmail,
             password: regPassword,
@@ -160,25 +155,7 @@ router.post('/register', [
         }
 
         res.json({ user });
-
-        /* const payload = {
-            user: {
-                id: user.id
-            }
-        } */
-
-
-
-        /* jwt.sign(payload, 'secret token', { expiresIn: 360000 }, (error, token) => {
-            if (error) throw error;
-            res.json({ token });
-            console.log('====================================');
-            console.log("token generated");
-            console.log('====================================');
-            console.log(token);
-            console.log('====================================');
-        }); */
-
+        
     } catch (error) {
         console.log(error.message);
         res.status(500).send(error.message);

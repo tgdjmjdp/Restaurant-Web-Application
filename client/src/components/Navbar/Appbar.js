@@ -51,14 +51,7 @@ const Appbar = ({
         userData
     }
 }) => {
-
-
-    if (userData !== null) {
-        console.log('====================================');
-        console.log(userData);
-        console.log('====================================');
-    }
-
+    
     const classes = fontStyle();
 
     const [logoutModal, setLogoutModal] = React.useState(false);
@@ -176,7 +169,15 @@ const Appbar = ({
                                         <MDBNavItem>
                                             <MDBDropdown>
                                                 <MDBDropdownToggle nav caret color="primary">
-                                                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" className="rounded-circle z-depth-0"
+                                                    <img src={
+                                                        userData !== null ? (
+                                                            userData.avatar 
+                                                        ) : (
+                                                                <span>
+
+                                                                </span>
+                                                            )
+                                                    } className="rounded-circle z-depth-0"
                                                         style={{ height: "35px", padding: 0 }} alt="" />
                                                 </MDBDropdownToggle>
                                                 <MDBDropdownMenu basic>

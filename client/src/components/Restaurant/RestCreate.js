@@ -1,64 +1,116 @@
 import React from 'react'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 // MDB
 
 import {
     MDBRow,
     MDBCol,
-    MDBInputGroup,
-    MDBContainer
+    MDBContainer,
+    MDBBtn,
 } from "mdbreact";
 
-const RestCreate = props => {
+// function
+
+import { fontStyle } from '../../Styles/font'
+import { createRest, clearRestState } from '../../redux/actions/restAction'
+
+const RestCreate = ({
+    createRest,
+    clearRestState,
+    authState: { userData },
+    restState: { restData, restCreated }
+}) => {
+
+    const fontclass = fontStyle();
+
+    const [restCreate, setRestCreate] = React.useState({
+        restName: ''
+    });
+
+    const { restName } = restCreate;
+
+    const setRestValue = e => setRestCreate({
+        ...restCreate, [e.target.name]: e.target.value
+    });
+
+    const submitRestCreate = async e => {
+        e.preventDefault();
+        const isCreated = await createRest({
+            restName
+        });
+        if (typeof isCreated !== 'undefined') {
+            console.log('============== rest_CREATE_SUBMIT ======================');
+            console.log(isCreated.rest.data._id);
+            console.log('====================================');
+        }
+    }
+
+    if (restCreated !== false) {
+        
+        clearRestState();
+        return <Redirect to={'/rest/' + restData._id} />
+        
+    }
+
+
+
     return (
         <React.Fragment>
-            <MDBRow className="h-100">
-                <MDBCol md="6" className="mx-auto  ">
-                    <MDBContainer
-                        className="grey lighten-5 p-5"
-                        header="Material input groups"
-                        description="Material Design styling for Bootstrap Input Group component"
-                    >
-                        <MDBInputGroup
-                            material
-                            containerClassName="mb-3 mt-0"
-                            prepend="@"
-                            hint="Username" />
-                        <MDBInputGroup
-                            material
-                            hint="Recipient's username"
-                            containerClassName="mb-3 mt-0"
-                            append="@example.com"
-                        />
-                        <MDBInputGroup
-                            material
-                            label="Your vanity URL"
-                            labelClassName="mb-0 ml-2"
-                            containerClassName="mb-3 mt-0"
-                            prepend="https://example.com/users/"
-                            id="basic-url-material"
-                        />
-                        <MDBInputGroup
-                            material
-                            containerClassName="mb-3"
-                            prepend="$"
-                            append=".00"
-                        />
-                        <MDBInputGroup
-                            material
-                            className="mb-0"
-                            prepend="With textarea"
-                            type="textarea"
-                        />
-                    </MDBContainer>
-                </MDBCol>
-            </MDBRow>
+            <div className={fontclass.laoFont}>
+                <MDBRow className="h-100">
+                    <MDBCol md="8" className="mx-auto  ">
+                        <MDBContainer
+                            className="grey lighten-5 p-5"
+                            header="Material input groups"
+                            description="Material Design styling for Bootstrap Input Group component"
+                        >
+                            <form
+                                onSubmit={e => submitRestCreate(e)}
+                            >
+                                <p className="h4 text-center mb-4">Sign in</p>
+                                <label htmlFor="regName" className="grey-text">
+                                    ຊື່ຮ້ານອາຫານ
+                                </label>
+                                <input
+                                    type="text"
+                                    id="regName"
+                                    name="restName"
+                                    className="form-control"
+                                    onChange={e => setRestValue(e)}
+                                    value={restCreate.restName}
+                                />
+                                <br />
+                                <div className="text-center mt-4">
+                                    <MDBBtn color="indigo" type="submit">
+                                        ສ້າງ
+                                    </MDBBtn>
+                                </div>
+                            </form>
+                        </MDBContainer>
+                    </MDBCol>
+                </MDBRow>
+            </div>
         </React.Fragment>
     )
 }
 
 RestCreate.propTypes = {
-
+    authState: PropTypes.object.isRequired,
+    restState: PropTypes.object.isRequired,
+    createRest: PropTypes.func.isRequired,
+    clearRestState: PropTypes.func.isRequired,
 }
 
-export default RestCreate
+const mapStateToProps = state => ({
+    authState: state.authReducer,
+    restState: state.restReducer
+})
+
+export default connect(mapStateToProps, {
+    createRest,
+    clearRestState
+})(RestCreate)
+

@@ -14,6 +14,8 @@ import './App.css'
 import RestCreate from './components/Restaurant/RestCreate';
 import SideNav from './components/Navbar/SideNav'
 import Appbar from './components/Navbar/Appbar'
+import Notification from './components/Notification/Notification'
+import Restaurant from './components/Restaurant/Restaurant'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -30,14 +32,14 @@ const App = () => {
       <Router>
         <React.Fragment>
           <CssBaseline />
-
           <Appbar />
           <SideNav />
-
-          <div className="pt-5">
+          <Notification />
+          <div className="m-5">
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/restaurant/create" component={RestCreate} />
+              <Route exact path="/rest/:rest_id" component={Restaurant} />
             </Switch>
           </div>
         </React.Fragment>
