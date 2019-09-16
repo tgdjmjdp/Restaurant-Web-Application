@@ -64,4 +64,19 @@ router.get('/:rest_id', async (req, res) => {
 
 });
 
+router.post('/my', AuthMiddleware, async (req, res) => {
+
+    try {
+
+        const rests = await RestModel.find({"owner": req.user.id})
+        
+        res.json(rests);
+        
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send('Server Error');
+    }
+
+});
+
 module.exports = router;

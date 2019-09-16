@@ -37,6 +37,7 @@ import {
 // Components
 
 import AuthModalForm from './AuthModalForm'
+import RestDropdown from './RestDropdown'
 
 const Appbar = ({
     toggleAuthModal,
@@ -46,12 +47,15 @@ const Appbar = ({
         sideNav,
         authModal
     },
+    restState: {
+        myRestList
+    },
     authState: {
         isLogin,
         userData
     }
 }) => {
-    
+
     const classes = fontStyle();
 
     const [logoutModal, setLogoutModal] = React.useState(false);
@@ -152,14 +156,10 @@ const Appbar = ({
                                                     </div>
                                                 </MDBDropdownToggle>
                                                 <MDBDropdownMenu basic>
-                                                    <MDBDropdownItem>
-                                                        <span style={{ fontFamily: "Saysettha OT" }} className="">
-                                                            ໂປຣໄຟລ໌XXXXXXXX
-                                                        </span>
-                                                    </MDBDropdownItem>
+                                                    <RestDropdown />
                                                     <MDBDropdownItem divider />
                                                     <MDBDropdownItem style={{ fontFamily: "Saysettha OT" }} >
-                                                        <Link to="/restaurant/create" >
+                                                        <Link className="p-0" to="/restaurant/create" >
                                                             ເພີ່ມຮ້ານອາຫານ
                                                         </Link>
                                                     </MDBDropdownItem>
@@ -171,7 +171,7 @@ const Appbar = ({
                                                 <MDBDropdownToggle nav caret color="primary">
                                                     <img src={
                                                         userData !== null ? (
-                                                            userData.avatar 
+                                                            userData.avatar
                                                         ) : (
                                                                 <span>
 
@@ -258,6 +258,7 @@ const Appbar = ({
 Appbar.propTypes = {
     navState: PropTypes.object.isRequired,
     authState: PropTypes.object.isRequired,
+    restState: PropTypes.object.isRequired,
     toggleAuthModal: PropTypes.func.isRequired,
     toggleSideNav: PropTypes.func.isRequired,
     logoutUser: PropTypes.func.isRequired,
@@ -265,7 +266,8 @@ Appbar.propTypes = {
 
 const mapStateToProps = state => ({
     navState: state.navReducer,
-    authState: state.authReducer
+    authState: state.authReducer,
+    restState: state.restReducer
 })
 
 export default connect(mapStateToProps, {

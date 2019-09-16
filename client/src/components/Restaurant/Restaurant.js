@@ -1,12 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { MDBContainer, MDBView, MDBMask } from 'mdbreact'
+import {
+    MDBRow,
+    MDBCol,
+    MDBContainer,
+    MDBCard,
+    MDBCardUp,
+    MDBAvatar,
+    MDBCardImage,
+    MDBCardTitle,
+    MDBCardBody,
+    MDBCardText,
+    MDBBtn
+} from 'mdbreact'
 
 // functions
 
 import { getRestById, clearRestState } from '../../redux/actions/restAction'
 import { fontStyle } from '../../Styles/font'
+import { width } from '@material-ui/system'
 
 // components
 
@@ -19,8 +32,6 @@ const Restaurant = ({
         restData
     }
 }) => {
-
-    const classes = fontStyle();
 
     React.useEffect(() => {
         getRestById(match.params.rest_id);
@@ -47,9 +58,31 @@ const Restaurant = ({
                 </div>
             </div>
         ) : (
-                <h4>
-                    asdas
-                </h4>
+                <MDBContainer fluid>
+                    <MDBRow>
+                        <div>
+                            <MDBCard>
+                                <MDBCardImage
+                                    cascade
+                                    className="img-fluid "
+                                    style={{ 
+                                        width: '100%',
+                                        height: '300px'
+                                     }}
+                                    src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
+                                />
+                                <MDBCardBody>
+                                    <MDBCardTitle>Card title</MDBCardTitle>
+                                    <MDBCardText>
+                                        Some quick example text to build on the card title and make
+                                        up the bulk of the card&apos;s content.
+                                    </MDBCardText>
+                                    <MDBBtn href="#">MDBBtn</MDBBtn>
+                                </MDBCardBody>
+                            </MDBCard>
+                        </div>
+                    </MDBRow>
+                </MDBContainer>
             )
 
     )

@@ -3,7 +3,8 @@ import {
     REST_CREATE_FAILED,
     REST_CREATE_SUCCESS,
     REST_CLEAR,
-    REST_GET_DATA
+    REST_GET_DATA,
+    GET_MY_RESTS
 } from '../types/restType'
 
 export const createRest = ({
@@ -81,5 +82,28 @@ export const getRestById = rest_id => async dispatch => {
     }
 
 
+}
+
+export const getMyRests = () => async dispatch => {
+    try {
+        
+        const res = await axios.post('/api/rest/my/');
+
+        await dispatch({
+            type: GET_MY_RESTS,
+            payload: res.data
+        })
+
+        console.log('============= GET_MY_RESTS_SUCCESS =======================');
+        console.log(res.data);
+        console.log('====================================');
+
+    } catch (error) {
+        
+        console.log('============== GET_MY_RESTS_FAILED ======================');
+        console.log(error.message);
+        console.log('====================================');
+
+    }
 }
 
