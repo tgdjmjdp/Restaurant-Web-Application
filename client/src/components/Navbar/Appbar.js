@@ -20,7 +20,8 @@ import {
     MDBDropdownToggle,
     MDBDropdownMenu,
     MDBDropdownItem,
-    MDBIcon
+    MDBIcon,
+    MDBFormInline
 } from "mdbreact";
 
 // functions 
@@ -77,8 +78,7 @@ const Appbar = ({
                 className="pt-0 pb-0 grey "
                 color="indigo"
                 dark
-                expand="sm"
-                fixed="top"
+                expand="xs"
                 scrolling
             >
                 <MDBNavbarBrand className="d-flex" >
@@ -145,7 +145,7 @@ const Appbar = ({
                                             </MDBDropdown>
                                         </MDBNavItem>
                                         <MDBNavItem>
-                                            <MDBDropdown>
+                                            <MDBDropdown className="">
                                                 <MDBDropdownToggle
                                                     className=""
                                                     nav
@@ -183,8 +183,8 @@ const Appbar = ({
                                                 <MDBDropdownMenu basic>
                                                     <MDBDropdownItem>
                                                         <span style={{ fontFamily: "Saysettha OT" }} className="">
-                                                            ໂປຣໄຟລ໌
-                                                    </span>
+                                                            ໂປຣໄຟລ໌ {userData.name}
+                                                        </span>
                                                     </MDBDropdownItem>
                                                     <MDBDropdownItem divider />
                                                     <MDBDropdownItem
@@ -251,6 +251,56 @@ const Appbar = ({
                 </div>
             </MDBModal>
             <AuthModalForm />
+            {/* <MDBNavbar color="grey" dark fixed="top" expand="sm">
+                <MDBNavbarBrand className="d-flex" >
+                    <MDBNavLink to="#" onClick={() => toggleSideNav()} >
+                        <span class="navbar-toggler-icon"></span>
+                    </MDBNavLink>
+                    <MDBNavLink
+                        to="/"
+                        button="true">
+                        <strong className="white-text">
+                            Navbar
+                                </strong>
+                    </MDBNavLink>
+                </MDBNavbarBrand>
+                <MDBNavbarToggler onClick={() => toggleCollapse()} />
+                <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
+                    <MDBNavbarNav left>
+                        <MDBNavItem active>
+                            <MDBNavLink to="#!">Home</MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink to="#!">Features</MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink to="#!">Pricing</MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBDropdown>
+                                <MDBDropdownToggle nav caret>
+                                    <span className="mr-2">Dropdown</span>
+                                </MDBDropdownToggle>
+                                <MDBDropdownMenu>
+                                    <MDBDropdownItem href="#!">Action</MDBDropdownItem>
+                                    <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
+                                    <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
+                                    <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
+                                </MDBDropdownMenu>
+                            </MDBDropdown>
+                        </MDBNavItem>
+                    </MDBNavbarNav>
+                    <MDBNavbarNav right>
+                        <MDBNavItem>
+                            <MDBFormInline waves>
+                                <div className="md-form my-0">
+                                    <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
+                                </div>
+                            </MDBFormInline>
+                        </MDBNavItem>
+                    </MDBNavbarNav>
+                </MDBCollapse>
+            </MDBNavbar> */}
         </React.Fragment >
     )
 }

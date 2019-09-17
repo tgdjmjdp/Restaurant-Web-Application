@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
+import '../../index.css'
 import {
     MDBNavItem,
     MDBDropdown,
@@ -13,21 +14,19 @@ import {
 
 // function
 
-import {
-    getMyRests
-} from './../../redux/actions/restAction'
 import store from '../../redux/store'
 
 const RestDropdown = ({
-    restState: { myRestList }
+    authState: { myRestList }
 }) => {
 
-    React.useEffect(() => {
-        store.dispatch(getMyRests());
-    }, [])
-
     return (
-        <React.Fragment>
+        <div
+            style={{
+                maxHeight: "200px",
+            }}
+            className="overflow-auto "
+        >
             {
                 myRestList.length > 0 ? (
                     myRestList.map(myRest => (
@@ -50,16 +49,18 @@ const RestDropdown = ({
                         </MDBDropdownItem>
                     )
             }
-        </React.Fragment>
+        </div>
     )
 }
 
 RestDropdown.propTypes = {
     restState: PropTypes.object.isRequired,
+    authState: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
-    restState: state.restReducer
+    restState: state.restReducer,
+    authState: state.authReducer,
 })
 
 export default connect(mapStateToProps, {

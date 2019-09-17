@@ -4,6 +4,7 @@ import {
     REGISTER_SUCCESS,
     USER_LOADED,
     LOGOUT,
+    GET_MY_RESTS
 } from '../types/authType';
 
 import {
@@ -15,6 +16,7 @@ const initialState = {
     isLogin: false,
     isRegistered: false,
     userData: null,
+    myRestList: []
 }
 
 export default function (state = initialState, action) {
@@ -22,6 +24,12 @@ export default function (state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
+        
+        case GET_MY_RESTS:
+            return {
+                ...state,
+                myRestList: payload
+            }
         case USER_LOADED:
             console.log("HAHA");
             return {

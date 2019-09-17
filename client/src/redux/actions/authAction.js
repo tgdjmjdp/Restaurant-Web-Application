@@ -6,7 +6,8 @@ import {
     AUTH_ERROR,
     LOGIN_FAIL,
     CLEAR_PROFILE,
-    LOGOUT
+    LOGOUT,
+    GET_MY_RESTS
 } from '../types/authType'
 
 import setAuthToken from '../../utils/setAuthToken'
@@ -66,16 +67,37 @@ export const loadUser = () => async dispatch => {
 
         const res = await axios.get('/api/auth/');
 
-        dispatch({
+        await dispatch({
             type: USER_LOADED,
             payload: res.data
         });
 
+         dispatch(getMyRests()); 
     } catch (err) {
 
         dispatch({
             type: AUTH_ERROR
         });
+        
+    }
+}
+
+export const getMyRests = () => async dispatch => {
+    try {
+        
+        const res = await axios.post('/api/rest/my/');
+
+        await dispatch({
+            type: GET_MY_RESTS,
+            payload: res.data
+        })
+
+        console.log(res.data);
+
+    } catch (error) {
+        
+        console.log(error.message);
+
     }
 }
 
@@ -89,8 +111,6 @@ export const loginUser = ({ loginEmail, loginPassword }) => async dispatch => {
 
     }
 
-
-
     const body = JSON.stringify({ loginEmail, loginPassword });
 
     try {
@@ -102,15 +122,13 @@ export const loginUser = ({ loginEmail, loginPassword }) => async dispatch => {
             payload: res.data
         });
 
-        await dispatch(loadUser());
+        await dispatch(loadUser()); 
 
     } catch (error) {
 
         const errors = error.reponse;
 
-        console.log('====================================');
         console.log(error);
-        console.log('====================================');
 
         dispatch({
             type: LOGIN_FAIL

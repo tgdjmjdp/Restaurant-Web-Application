@@ -33,7 +33,12 @@ const App = () => {
       <Router>
         <React.Fragment>
           <CssBaseline />
-          <div className="position-relative overflow-auto pb-1">
+          <div 
+          style={{ 
+            top: "0",
+            zIndex: "50"
+          }} 
+          className="position-sticky pb-1">
             <Appbar />
           </div>
           <SideNav />

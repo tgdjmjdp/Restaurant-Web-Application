@@ -4,7 +4,6 @@ import {
     REST_CREATE_SUCCESS,
     REST_CLEAR,
     REST_GET_DATA,
-    GET_MY_RESTS
 } from '../types/restType'
 
 export const createRest = ({
@@ -84,7 +83,7 @@ export const getRestById = rest_id => async dispatch => {
 
 }
 
-export const getMyRests = () => async dispatch => {
+/* export const getMyRests = () => async dispatch => {
     try {
         
         const res = await axios.post('/api/rest/my/');
@@ -106,4 +105,4 @@ export const getMyRests = () => async dispatch => {
 
     }
 }
-
+ */

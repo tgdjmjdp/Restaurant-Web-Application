@@ -3,4 +3,3 @@ export const REST_CREATE_SUCCESS = 'REST_CREATE_SUCCESS';
 export const REST_CREATE_FAILED = 'REST_CREATE_FAILED';
 export const REST_CLEAR = 'REST_CLEAR';
 export const REST_GET_DATA = 'REST_GET_DATA';
-export const GET_MY_RESTS = 'GET_MY_RESTS';
