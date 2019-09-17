@@ -23,9 +23,9 @@ const RestDropdown = ({
     return (
         <div
             style={{
-                maxHeight: "200px",
+                maxHeight: "250px",
             }}
-            className="overflow-auto "
+            className="overflow-auto scrollbar scrollbar-default"
         >
             {
                 myRestList.length > 0 ? (
