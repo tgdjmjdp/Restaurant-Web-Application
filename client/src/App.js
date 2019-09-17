@@ -38,12 +38,13 @@ const App = () => {
             top: "0",
             zIndex: "50"
           }} 
-          className="position-sticky pb-1">
+          className="position-sticky pb-1"
+          >
             <Appbar />
           </div>
           <SideNav />
           <Notification />
-          <div className="mt-5">
+          <div className="">
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/restaurant/create" component={RestCreate} />

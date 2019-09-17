@@ -75,10 +75,10 @@ const Appbar = ({
     return (
         <React.Fragment>
             <MDBNavbar
-                className="pt-0 pb-0 grey "
+                className=" grey "
                 color="indigo"
                 dark
-                expand="xs"
+                expand="md"
                 scrolling
             >
                 <MDBNavbarBrand className="d-flex" >
@@ -126,7 +126,7 @@ const Appbar = ({
                                                         <MDBIcon size="2x" icon="bell" />
                                                     </div>
                                                 </MDBDropdownToggle>
-                                                <MDBDropdownMenu basic>
+                                                <MDBDropdownMenu right basic>
                                                     <MDBDropdownItem>
                                                         <span style={{ fontFamily: "Saysettha OT" }} className="">
                                                             ແຈ້ງເຕືອນ
@@ -155,7 +155,7 @@ const Appbar = ({
                                                         <MDBIcon size="2x" icon="home" />
                                                     </div>
                                                 </MDBDropdownToggle>
-                                                <MDBDropdownMenu basic>
+                                                <MDBDropdownMenu right basic>
                                                     <RestDropdown />
                                                     <MDBDropdownItem divider />
                                                     <MDBDropdownItem style={{ fontFamily: "Saysettha OT" }} >
@@ -180,7 +180,7 @@ const Appbar = ({
                                                     } className="rounded-circle z-depth-0"
                                                         style={{ height: "35px", padding: 0 }} alt="" />
                                                 </MDBDropdownToggle>
-                                                <MDBDropdownMenu basic>
+                                                <MDBDropdownMenu right basic>
                                                     <MDBDropdownItem>
                                                         <span style={{ fontFamily: "Saysettha OT" }} className="">
                                                             ໂປຣໄຟລ໌ {userData.name}
@@ -193,7 +193,7 @@ const Appbar = ({
                                                         className="align-middle"
                                                     >
                                                         ອອຈາກລະບົບ
-                                                </MDBDropdownItem>
+                                                    </MDBDropdownItem>
                                                 </MDBDropdownMenu>
                                             </MDBDropdown>
                                         </MDBNavItem>
@@ -251,18 +251,9 @@ const Appbar = ({
                 </div>
             </MDBModal>
             <AuthModalForm />
-            {/* <MDBNavbar color="grey" dark fixed="top" expand="sm">
-                <MDBNavbarBrand className="d-flex" >
-                    <MDBNavLink to="#" onClick={() => toggleSideNav()} >
-                        <span class="navbar-toggler-icon"></span>
-                    </MDBNavLink>
-                    <MDBNavLink
-                        to="/"
-                        button="true">
-                        <strong className="white-text">
-                            Navbar
-                                </strong>
-                    </MDBNavLink>
+            {/* <MDBNavbar color="default-color" dark expand="md">
+                <MDBNavbarBrand>
+                    <strong className="white-text">Navbar</strong>
                 </MDBNavbarBrand>
                 <MDBNavbarToggler onClick={() => toggleCollapse()} />
                 <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
@@ -279,9 +270,9 @@ const Appbar = ({
                         <MDBNavItem>
                             <MDBDropdown>
                                 <MDBDropdownToggle nav caret>
-                                    <span className="mr-2">Dropdown</span>
+                                    <div className="d-none d-md-inline">Dropdown</div>
                                 </MDBDropdownToggle>
-                                <MDBDropdownMenu>
+                                <MDBDropdownMenu className="dropdown-default bg-primary">
                                     <MDBDropdownItem href="#!">Action</MDBDropdownItem>
                                     <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
                                     <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
@@ -292,11 +283,27 @@ const Appbar = ({
                     </MDBNavbarNav>
                     <MDBNavbarNav right>
                         <MDBNavItem>
-                            <MDBFormInline waves>
-                                <div className="md-form my-0">
-                                    <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
-                                </div>
-                            </MDBFormInline>
+                            <MDBNavLink className="waves-effect waves-light" to="#!">
+                                <MDBIcon fab icon="twitter" />
+                            </MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink className="waves-effect waves-light" to="#!">
+                                <MDBIcon fab icon="google-plus-g" />
+                            </MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBDropdown className="" dropright>
+                                <MDBDropdownToggle nav caret>
+                                    <MDBIcon icon="user" />
+                                </MDBDropdownToggle>
+                                <MDBDropdownMenu className="dropdown-default pull-right bg-primary">
+                                    <MDBDropdownItem href="#!">Action</MDBDropdownItem>
+                                    <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
+                                    <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
+                                    <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
+                                </MDBDropdownMenu>
+                            </MDBDropdown>
                         </MDBNavItem>
                     </MDBNavbarNav>
                 </MDBCollapse>
