@@ -30,16 +30,20 @@ const RestDropdown = ({
             {
                 myRestList.length > 0 ? (
                     myRestList.map(myRest => (
-                        <MDBDropdownItem key={myRest._id} >
-                            <Link className="" to={"/rest/" + myRest._id} >
-                                {
-                                    myRest.name
-                                }
-                            </Link>
-                            {/* <span style={{ fontFamily: "Saysettha OT" }} className="">
-
-                            </span> */}
-                        </MDBDropdownItem>
+                        <Link
+                            style={{ maxWidth: "300px" }}
+                            key={myRest._id}
+                            className="p-0"
+                            to={"/rest/" + myRest._id}
+                        >
+                            <MDBDropdownItem >
+                                <span className="text-break text-wrap">
+                                    {
+                                        myRest.name
+                                    }
+                                </span>
+                            </MDBDropdownItem>
+                        </Link>
                     ))
                 ) : (
                         <MDBDropdownItem>
