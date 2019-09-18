@@ -7,4 +7,6 @@ import "mdbreact/dist/css/mdb.css";
 import "mdbreact/dist/css/style.css";
 import "./index.css";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 ReactDOM.render(<App />, document.getElementById('root'));

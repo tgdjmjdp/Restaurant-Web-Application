@@ -48,7 +48,7 @@ const App = () => {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/restaurant/create" component={RestCreate} />
-              <Route exact path="/rest/:rest_id" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/" component={Restaurant} />
             </Switch>
           </div>
           {/* <div style={{ bottom: '0' }} className="position-absolute w-100">
