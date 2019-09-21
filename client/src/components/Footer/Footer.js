@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 
 const Footer = props => {

@@ -57,6 +57,10 @@ export const clearRestState = () => async dispatch => {
 }
 
 export const getRestById = rest_id => async dispatch => {
+
+    console.log('====================================');
+    console.log("GET REST DATA ");
+    console.log('====================================');
     try {
 
         await dispatch({

@@ -20,6 +20,11 @@ const UserSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    address: {
+        province: { type: String },
+        district: { type: String },
+        village: { type: String }
     }
 })
     

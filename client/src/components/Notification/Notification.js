@@ -1,6 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { MDBNotification, MDBContainer } from "mdbreact";
+import { MDBContainer } from "mdbreact";
 
 const Notification = props => {
     return (

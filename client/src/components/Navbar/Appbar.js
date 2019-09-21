@@ -21,7 +21,6 @@ import {
     MDBDropdownMenu,
     MDBDropdownItem,
     MDBIcon,
-    MDBFormInline
 } from "mdbreact";
 
 // functions 
@@ -44,13 +43,6 @@ const Appbar = ({
     toggleAuthModal,
     toggleSideNav,
     logoutUser,
-    navState: {
-        sideNav,
-        authModal
-    },
-    restState: {
-        myRestList
-    },
     authState: {
         isLogin,
         userData

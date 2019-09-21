@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import {
     MDBCol,
     MDBContainer,
@@ -14,7 +14,8 @@ import {
     MDBRow,
     MDBNav,
     MDBNavItem,
-    MDBNavLink
+    MDBNavLink,
+    MDBBtn
 } from 'mdbreact'
 
 // functions
@@ -63,28 +64,18 @@ const Restaurant = ({
     }
 }) => {
 
+    const restId = match.params.rest_id;
+
     const styleFont = fontStyle();
 
     const styleRest = useStyles();
 
     React.useEffect(() => {
-        getRestById(match.params.rest_id);
+        getRestById(restId);
     }, [getRestById]);
 
-    const theme = useTheme();
-
-    console.log('============ URL ========================');
-    console.log(match.params.rest_id);
-    console.log('====================================');
-
-    const [value, setValue] = React.useState(0);
-
-    function handleChange(event, newValue) {
-        setValue(newValue);
-    }
-
     return (
-        <Router>
+        <React.Fragment>
             {
                 restData === null ? (
 
@@ -112,7 +103,7 @@ const Restaurant = ({
                                     <div style={{ width: '100%' }} >
                                         <MDBCard style={{ borderRadius: 0 }} >
                                             <div className="position-relative" >
-                                                <div>
+                                                <div className="">
                                                     <MDBCardImage
                                                         cascade
                                                         className={styleRest.banner}
@@ -128,15 +119,28 @@ const Restaurant = ({
                                                             xs="12"
                                                             className={styleRest.avatarCol}
                                                         >
-                                                            <Avatar
-                                                                style={{
-                                                                    border: "5px white solid",
-                                                                    width: "150px",
-                                                                    height: "150px",
-                                                                }}
-                                                                alt="Remy Sharp"
-                                                                src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
-                                                            />
+                                                            <div className=" ">
+                                                                <Avatar
+                                                                    style={{
+                                                                        border: "5px white solid",
+                                                                        width: "150px",
+                                                                        height: "150px",
+                                                                    }}
+                                                                    alt="Remy Sharp"
+                                                                    src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
+                                                                />
+                                                                {/* <div
+                                                                    style={{
+                                                                        height: '150px',
+                                                                        width: '150px',
+                                                                        top: '0px',
+                                                                        borderRadius: '100px'
+                                                                    }}
+                                                                    className="position-absolute text-center circle bg-danger"
+                                                                >
+                                                                    CLICK ME
+                                                                </div> */}
+                                                            </div>
                                                         </MDBCol>
                                                         <MDBCol
                                                             lg="6"
@@ -172,28 +176,31 @@ const Restaurant = ({
                                             </div>
                                             <div className={styleFont.laoFont}>
                                                 <MDBCardBody className=" black-text ">
-                                                    <MDBNav className="nav-pills nav-fill">
-                                                        <MDBNavItem >
-                                                            <MDBNavLink to={`/rest/${match.params.rest_id}`}>
-                                                                ໜ້າຮ້ານ
+                                                    <MDBContainer>
+                                                        <MDBNav className="nav-pills nav-fill">
+                                                            <MDBNavItem >
+                                                                <MDBNavLink to={`/rest/${match.params.rest_id}/home`}>
+                                                                    HOME
                                                             </MDBNavLink>
-                                                        </MDBNavItem>
-                                                        <MDBNavItem >
-                                                            <MDBNavLink to={`/rest/${match.params.rest_id}/asset`}>
-                                                                ລາຍການອາຫານ
+                                                            </MDBNavItem>
+                                                            <MDBNavItem >
+                                                                <MDBNavLink to={`/rest/${match.params.rest_id}/asset`}>
+                                                                    Restaurant
                                                             </MDBNavLink>
-                                                        </MDBNavItem>
-                                                        <MDBNavItem >
-                                                            <MDBNavLink to={`/rest/${match.params.rest_id}/review`}>
-                                                                ຣີວິວ
+                                                            </MDBNavItem>
+                                                            <MDBNavItem >
+                                                                <MDBNavLink to={`/rest/${match.params.rest_id}/review`}>
+                                                                    Review
                                                             </MDBNavLink>
-                                                        </MDBNavItem>
-                                                        <MDBNavItem >
-                                                            <MDBNavLink to={`/rest/${match.params.rest_id}/dashboard`}>
-                                                                ຈັດການຂໍ້ມູນ
+                                                            </MDBNavItem>
+                                                            <MDBNavItem >
+                                                                <MDBNavLink to={`/rest/${match.params.rest_id}/dashboard`}>
+                                                                    Dashboard
                                                             </MDBNavLink>
-                                                        </MDBNavItem>
-                                                    </MDBNav>
+                                                            </MDBNavItem>
+                                                        </MDBNav>
+                                                    </MDBContainer>
+
                                                 </MDBCardBody>
                                             </div>
                                         </MDBCard>
@@ -204,7 +211,7 @@ const Restaurant = ({
                         </React.Fragment>
                     )
             }
-        </Router>
+        </React.Fragment>
     )
 }
 

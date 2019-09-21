@@ -31,7 +31,6 @@ export default function (state = initialState, action) {
                 myRestList: payload
             }
         case USER_LOADED:
-            console.log("HAHA");
             return {
                 ...state,
                 userData: payload,

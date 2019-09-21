@@ -4,17 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import { useStyles } from '../../../Styles/Navbar'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import {
-    MDBDropdown,
-    MDBDropdownItem,
-    MDBDropdownMenu,
-    MDBDropdownToggle,
-    MDBBtn,
-    MDBIcon,
     MDBContainer,
-    MDBCol,
-    MDBRow
 } from 'mdbreact'
 
 
@@ -33,25 +24,7 @@ const Home = ({
                     [classes.contentShift]: sidebarOpen,
                 })} >
                 <div  >
-                    <MDBContainer className="mt-5">
-                        <MDBRow>
-                            <MDBCol md="6" className="mb-4">
-                                <h3 className="secondary-heading mb-4">
-                                    Before
-          </h3>
-                                <div>
-                                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img (122).jpg" className="img-fluid" alt="My photo" />
-                                </div>
-                            </MDBCol>
-                            <MDBCol md="6">
-                                <h3 className="secondary-heading mb-4">
-                                    After
-          </h3>
-                                <div >
-                                    <img className="img-gradient dusty-grass-gradient" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img (122).jpg" className="img-fluid" alt="My photo" />
-                                </div>
-                            </MDBCol>
-                        </MDBRow>
+                    <MDBContainer className="mt-5">]sad
                     </MDBContainer>
                     <Typography paragraph>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt

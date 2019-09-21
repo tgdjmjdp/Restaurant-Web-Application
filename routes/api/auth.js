@@ -11,7 +11,7 @@ const config = require('config');
 
 router.get('/', AuthMiddleware, async (req, res) => {
 
-    
+
     console.log('====================================');
     console.log(req.user.id);
     console.log('====================================');
@@ -155,12 +155,113 @@ router.post('/register', [
         }
 
         res.json({ user });
-        
+
     } catch (error) {
         console.log(error.message);
         res.status(500).send(error.message);
     }
 
+})
+
+router.post('/changepassword', [AuthMiddleware, [
+
+    check('userPassword', 'ລະຫັດຜ່ານຕ້ອງຫຼາຍກວ່າ 8 ໂຕອັກສອນ').isLength({ min: 8 })
+
+]], async (req, res) => {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+
+        return res.status(400).json({ errors: errors.array() });
+
+    }
+
+    try {
+
+        const salt = await bcrypt.genSalt(10)
+
+        newPassword = await bcrypt.hash(req.body.userPassword, salt)
+
+        const filter = { _id: req.user.id };
+
+        const update = { password: newPassword };
+
+        const user = await UserModel.findByIdAndUpdate(filter, update);
+
+        res.json({
+            user
+        })
+
+    } catch (error) {
+
+        res.send(error.array())
+
+    }
+
+})
+
+router.post('/changename', [AuthMiddleware, [
+
+    check('userName', 'ກະລຸນາປ້ອນຊື່ຜູ້ໃຊ້ງານ').not().isEmpty(),
+
+]], async (req, res) => {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+
+        return res.status(400).json({ errors: errors.array() });
+
+    }
+
+    try {
+
+        const filter = { _id: req.user.id };
+
+        const update = { name: req.body.userName };
+
+        await UserModel.findByIdAndUpdate(filter, update);
+
+        res.send("ປ່ຽນຊື່ສຳເລັດ");
+
+    } catch (error) {
+
+        res.send(error.message)
+
+    }
+
+})
+
+router.post('/useraddress', AuthMiddleware, async (req, res) => {
+
+    try {
+
+        const {
+            province,
+            district,
+            village
+        } = req.body
+
+        const filter = { _id: req.user.id };
+
+        const update = {
+            address: {
+                province,
+                district,
+                village
+            }
+        };
+
+        await UserModel.findByIdAndUpdate(filter, update);
+
+        res.send("ແກ້ໄຂທີ່ຢູ່ສຳເລັດ")
+
+    } catch (error) {
+
+        res.send(error.message)
+
+    }
 })
 
 module.exports = router;

@@ -16,7 +16,6 @@ import SideNav from './components/Navbar/SideNav'
 import Appbar from './components/Navbar/Appbar'
 import Notification from './components/Notification/Notification'
 import Restaurant from './components/Restaurant/Restaurant'
-import Footer from './components/Footer/Footer'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -48,12 +47,11 @@ const App = () => {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/restaurant/create" component={RestCreate} />
-              <Route exact path="/rest/:rest_id/" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/asset" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/asset/food" component={Restaurant} />
             </Switch>
           </div>
-          {/* <div style={{ bottom: '0' }} className="position-absolute w-100">
-            <Footer />
-          </div> */}
         </React.Fragment>
       </Router>
     </Provider>

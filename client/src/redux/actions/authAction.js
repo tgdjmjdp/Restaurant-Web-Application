@@ -92,8 +92,6 @@ export const getMyRests = () => async dispatch => {
             payload: res.data
         })
 
-        console.log(res.data);
-
     } catch (error) {
         
         console.log(error.message);

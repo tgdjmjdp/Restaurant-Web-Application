@@ -4,17 +4,10 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import '../../index.css'
 import {
-    MDBNavItem,
-    MDBDropdown,
-    MDBDropdownToggle,
-    MDBDropdownMenu,
     MDBDropdownItem,
-    MDBIcon
 } from "mdbreact";
 
 // function
-
-import store from '../../redux/store'
 
 const RestDropdown = ({
     authState: { myRestList }
@@ -34,7 +27,7 @@ const RestDropdown = ({
                             style={{ maxWidth: "300px" }}
                             key={myRest._id}
                             className="p-0"
-                            to={"/rest/" + myRest._id}
+                            to={"/rest/" + myRest._id + "/home"}
                         >
                             <MDBDropdownItem >
                                 <span className="text-break text-wrap">
