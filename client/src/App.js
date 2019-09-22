@@ -49,7 +49,11 @@ const App = () => {
               <Route exact path="/restaurant/create" component={RestCreate} />
               <Route exact path="/rest/:rest_id/home" component={Restaurant} />
               <Route exact path="/rest/:rest_id/asset" component={Restaurant} />
-              <Route exact path="/rest/:rest_id/asset/food" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home/food" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home/promotion" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home/seat" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home/vibe" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/dashboard" component={Restaurant} />
             </Switch>
           </div>
         </React.Fragment>

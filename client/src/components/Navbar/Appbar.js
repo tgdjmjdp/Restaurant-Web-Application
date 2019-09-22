@@ -74,11 +74,11 @@ const Appbar = ({
                 scrolling
             >
                 <MDBNavbarBrand className="d-flex" >
-                    <MDBNavLink to="#" onClick={() => toggleSideNav()} >
+                    {/* <MDBNavLink to="#" onClick={() => toggleSideNav()} >
                         <strong className="white-text">
                             <MDBIcon icon="bars" />
                         </strong>
-                    </MDBNavLink>
+                    </MDBNavLink> */}
                     <MDBNavLink
                         to="/"
                         button="true">
