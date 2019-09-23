@@ -74,11 +74,11 @@ const Appbar = ({
                 scrolling
             >
                 <MDBNavbarBrand className="d-flex" >
-                    <MDBNavLink to="#" onClick={() => toggleSideNav()} >
+                    {/* <MDBNavLink to="#" onClick={() => toggleSideNav()} >
                         <strong className="white-text">
                             <MDBIcon icon="bars" />
                         </strong>
-                    </MDBNavLink>
+                    </MDBNavLink> */}
                     <MDBNavLink
                         to="/"
                         button="true">
@@ -175,7 +175,14 @@ const Appbar = ({
                                                 <MDBDropdownMenu right basic>
                                                     <MDBDropdownItem>
                                                         <span style={{ fontFamily: "Saysettha OT" }} className="">
-                                                            ໂປຣໄຟລ໌ {userData.name}
+                                                            ໂປຣໄຟລ໌
+                                                            {
+                                                                userData !== null ? (
+                                                                    userData.name
+                                                                ) : (
+                                                                       ""
+                                                                    )
+                                                            }
                                                         </span>
                                                     </MDBDropdownItem>
                                                     <MDBDropdownItem divider />

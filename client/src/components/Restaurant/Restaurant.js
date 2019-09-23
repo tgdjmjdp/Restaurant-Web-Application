@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import {
     MDBCol,
     MDBContainer,
@@ -15,7 +15,6 @@ import {
     MDBNav,
     MDBNavItem,
     MDBNavLink,
-    MDBBtn
 } from 'mdbreact'
 
 // functions
@@ -72,7 +71,7 @@ const Restaurant = ({
 
     React.useEffect(() => {
         getRestById(restId);
-    }, [getRestById]);
+    }, [getRestById, restId]);
 
     return (
         <React.Fragment>
@@ -208,6 +207,8 @@ const Restaurant = ({
                                 </MDBRow>
                             </MDBContainer>
                             <Route path={`/rest/:rest_id/asset`} component={RestAsset} />
+                            <Route path={`/rest/:rest_id/home`} component={RestAsset} />
+                            
                         </React.Fragment>
                     )
             }

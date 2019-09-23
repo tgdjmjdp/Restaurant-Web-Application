@@ -19,4 +19,6 @@ app.use('/api/auth', require('./routes/api/auth'));
 
 app.use('/api/rest', require('./routes/api/rest'));
 
+app.use('/api/food', require('./routes/api/food'));
+
 app.listen(PORT, () => console.log("SERVER RUN AT " + PORT));

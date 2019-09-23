@@ -2,13 +2,8 @@
 const express = require('express');
 const router = express.Router();
 const RestModel = require('../../models/restaurantModel');
-const UserModel = require('../../models/userModel');
 const AuthMiddleware = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
-const gravatar = require('gravatar');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const config = require('config');
 
 router.post('/create', [AuthMiddleware, [
 
@@ -27,8 +22,6 @@ router.post('/create', [AuthMiddleware, [
     } = req.body
 
     try {
-
-        const restData = {};
 
         rest = new RestModel({
             owner: req.user.id,

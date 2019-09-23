@@ -76,8 +76,8 @@ router.post('/', [
             config.get('jwtToken'),
             { expiresIn: 360000 },
             (err, token) => {
-                console.log('====================================');
-                console.log(err);
+                console.log('============== TOKEN ====================');
+                console.log(token);
                 console.log('====================================');
                 res.json({ token });
             }

@@ -55,36 +55,9 @@ export const registerUser = ({
     }
 }
 
-export const loadUser = () => async dispatch => {
-
-    if (localStorage.token) {
-
-        setAuthToken(localStorage.token);
-
-    }
-
-    try {
-
-        const res = await axios.get('/api/auth/');
-
-        await dispatch({
-            type: USER_LOADED,
-            payload: res.data
-        });
-
-         dispatch(getMyRests()); 
-    } catch (err) {
-
-        dispatch({
-            type: AUTH_ERROR
-        });
-        
-    }
-}
-
 export const getMyRests = () => async dispatch => {
     try {
-        
+
         const res = await axios.post('/api/rest/my/');
 
         await dispatch({
@@ -93,7 +66,7 @@ export const getMyRests = () => async dispatch => {
         })
 
     } catch (error) {
-        
+
         console.log(error.message);
 
     }
@@ -115,12 +88,15 @@ export const loginUser = ({ loginEmail, loginPassword }) => async dispatch => {
 
         const res = await axios.post('/api/auth/', body, config);
 
-        dispatch({
+        console.log(res.data);        
+
+        await dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
         });
 
-        await dispatch(loadUser()); 
+        dispatch(loadUser());
+
 
     } catch (error) {
 
@@ -137,17 +113,45 @@ export const loginUser = ({ loginEmail, loginPassword }) => async dispatch => {
     }
 }
 
+export const loadUser = () => async dispatch => {
+
+    if (localStorage.token) {
+
+        setAuthToken(localStorage.token);
+
+    }
+
+    try {
+
+        const res = await axios.get('/api/auth/');
+
+        await dispatch({
+            type: USER_LOADED,
+            payload: res.data
+        });
+
+        dispatch(getMyRests());
+
+    } catch (err) {
+
+        dispatch({
+            type: AUTH_ERROR
+        });
+
+    }
+}
+
 export const logoutUser = () => dispatch => {
 
-    dispatch({ 
-        type: LOGOUT 
+    dispatch({
+        type: LOGOUT
     });
 
-    const clear = dispatch({ 
-        type: CLEAR_PROFILE 
+    const clear = dispatch({
+        type: CLEAR_PROFILE
     });
 
-    if (clear){
+    if (clear) {
         console.log('====================================');
         console.log("CLEAR PROFILE");
         console.log('====================================');

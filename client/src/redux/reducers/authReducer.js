@@ -24,7 +24,7 @@ export default function (state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
-        
+
         case GET_MY_RESTS:
             return {
                 ...state,
@@ -37,7 +37,17 @@ export default function (state = initialState, action) {
                 isLogin: true,
             }
         case LOGIN_SUCCESS:
-            localStorage.setItem('token', payload.token);
+
+            console.log('============== TOKRN ======================');
+            console.log(window.localStorage.getItem('token'));
+            console.log('====================================');
+
+            window.localStorage.setItem('token', payload.token);
+
+            console.log('============== TOKRN ======================');
+            console.log(window.localStorage.getItem('token'));
+            console.log('====================================');
+
             return {
                 ...state,
                 isRegistered: false,

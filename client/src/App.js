@@ -32,12 +32,12 @@ const App = () => {
       <Router>
         <React.Fragment>
           <CssBaseline />
-          <div 
-          style={{ 
-            top: "0",
-            zIndex: "50"
-          }} 
-          className="position-sticky pb-1"
+          <div
+            style={{
+              top: "0",
+              zIndex: "50"
+            }}
+            className="position-sticky pb-1"
           >
             <Appbar />
           </div>
@@ -46,10 +46,30 @@ const App = () => {
           <div className="">
             <Switch>
               <Route exact path="/" component={Home} />
+
+              {/* <Route exact path="/restaurant/create" component={RestCreate} />
+              <Route exact path="/rest/:rest_id/home" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/asset" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/asset/food" component={Restaurant} /> */}
+              {/* 
               <Route exact path="/restaurant/create" component={RestCreate} />
               <Route exact path="/rest/:rest_id/home" component={Restaurant} />
               <Route exact path="/rest/:rest_id/asset" component={Restaurant} />
-              <Route exact path="/rest/:rest_id/asset/food" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home/food" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home/promotion" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home/seat" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home/vibe" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/dashboard" component={Restaurant} /> */}
+
+              <Route exact path="/restaurant/create" component={RestCreate} />
+              <Route exact path="/rest/:rest_id/home" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home/food" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home/addfood" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home/promotion" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home/seat" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/home/vibe" component={Restaurant} />
+              <Route exact path="/rest/:rest_id/dashboard" component={Restaurant} />
+
             </Switch>
           </div>
         </React.Fragment>
