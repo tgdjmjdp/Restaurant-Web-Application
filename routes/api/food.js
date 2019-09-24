@@ -53,4 +53,43 @@ router.post('/add', [
 
 })
 
+router.post('/load', [
+
+    check('restID', 'ບໍ່ພົບຮ້ານອາຫານ').not().isEmpty(),
+
+], async (req, res) => {
+
+    const error = validationResult(req)
+
+    if (!error) {
+
+        return res.status(400).json({ errors: errors.array() });
+
+    }
+
+    const rest_id = await RestModel.findOne({
+        _id: req.body.restID
+    })
+
+    if (rest_id === null) {
+        return res.send("ບໍ່ພົບຮ້ານອາຫານ")
+    }
+
+    try {
+
+       const food = await FoodModel.find({ owner : req.body.restID})
+
+        if (food) {
+            return res.send(food)
+        }
+
+    } catch (error) {
+
+        console.log(error.message);
+        res.status(500).send(error.message);
+
+    }
+
+})
+
 module.exports = router;

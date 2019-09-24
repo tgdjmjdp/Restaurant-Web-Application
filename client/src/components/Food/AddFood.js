@@ -64,15 +64,8 @@ const AddFood = ({
     }
 
     const formSubmit = async e => {
-        console.log('============== SUBMIT ======================');
-        console.log(foodValue);
-        console.log('====================================');
         e.preventDefault()
-        const result = await foodAdd(foodValue)
-        console.log('============== RESULT ======================');
-        console.log(result);
-        console.log('====================================');
-        
+        await foodAdd(foodValue)        
     }
 
     return (

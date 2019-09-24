@@ -1,9 +1,10 @@
 import {
-    FOOD_ADD
+    FOOD_ADD,
+    FOOD_LOAD
 } from '../types/foodType';
 
 const initialState = {
-    foodState: null,
+    foodData: null,
 }
 
 export default function (state = initialState, action) {
@@ -14,6 +15,11 @@ export default function (state = initialState, action) {
         case FOOD_ADD:
             return {
                 ...state,
+            }
+        case FOOD_LOAD:
+            return {
+                ...state,
+                foodData: payload
             }
         default:
             return state;
