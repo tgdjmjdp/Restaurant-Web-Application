@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 // material
 
@@ -10,12 +12,20 @@ import {
 
 import CreatableSelect from 'react-select/creatable';
 
-const AddFood = props => {
+// functions
 
+import { foodAdd } from '../../redux/actions/foodAction'
+
+const AddFood = ({
+
+    foodAdd,
+    match
+
+}) => {
 
     const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'xxxxxx', label: 'Chocolate' },
+        { value: 'yyyy', label: 'Strawberry' },
         { value: 'vanilla', label: 'Vanilla' },
         { value: 'chocolate', label: 'Chocolate' },
         { value: 'noodle', label: 'noodle' },
@@ -23,39 +33,46 @@ const AddFood = props => {
         { value: 'shit', label: 'shit' },
     ];
 
-    const [addFood, setAddFood] = React.useState({
+    const [foodValue, setAddFood] = React.useState({
         foodType: [],
         foodName: '',
-        foodPrice: ''
+        foodPrice: '',
+        restID: match.params.rest_id
     })
 
-    const { foodName, foodPrice } = addFood
+    const { foodName, foodPrice } = foodValue
 
     const handleChange = e => {
         if (e !== null) {
             setAddFood({
-                ...addFood,
-                [e.target.name]: e.target.value
+                ...foodValue,
+                [e.target.name]: e.target.value,
             })
         }
     }
 
     const handleSelection = e => {
-        if ((typeof e !== 'undefined') && (e !== null)) {
-            console.log(
-                JSON.stringify(e)
-            );
-            
-            setAddFood({
-                ...addFood,
-                foodType: e.value
-            })
-        }
+
+        const foodTypes = e.map(
+           e => e.value
+        )
+
+        setAddFood({
+            ...foodValue,
+            foodType: foodTypes
+        })
     }
 
-    const formSubmit = e => {
-        console.log(addFood);
+    const formSubmit = async e => {
+        console.log('============== SUBMIT ======================');
+        console.log(foodValue);
+        console.log('====================================');
         e.preventDefault()
+        const result = await foodAdd(foodValue)
+        console.log('============== RESULT ======================');
+        console.log(result);
+        console.log('====================================');
+        
     }
 
     return (
@@ -107,6 +124,7 @@ const AddFood = props => {
                             <CreatableSelect
                                 name="foodType"
                                 id="foodType"
+                                placeholder="ເລືອກ..."
                                 isClearable
                                 isMulti
                                 onChange={e => handleSelection(e)}
@@ -128,6 +146,16 @@ const AddFood = props => {
 
 AddFood.propTypes = {
 
+    foodState: PropTypes.object.isRequired,
+
+    foodAdd: PropTypes.func.isRequired,
+
 }
 
-export default AddFood
+const mapStateToProps = state => ({
+
+    foodState: state.foodReducer
+
+})
+
+export default connect(mapStateToProps, { foodAdd })(AddFood)

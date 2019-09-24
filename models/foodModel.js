@@ -13,7 +13,12 @@ const UserSchema = new mongoose.Schema({
     },
     price: {
         type: Number
-    }
+    },
+    type: [
+        {
+            type: String
+        }
+    ]
 })
     
 module.exports = User = mongoose.model('foods', UserSchema);

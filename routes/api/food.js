@@ -15,34 +15,37 @@ router.post('/add', [
 
     const error = validationResult(req)
 
-    if (!error){
+    if (!error) {
 
         return res.status(400).json({ errors: errors.array() });
-    
+
     }
 
-    console.log('==============  REST ID ================');
-    console.log(req.body.restID);
-    console.log('====================================');    
-
     const rest_id = await RestModel.findOne({
-        "_id": ObjectId(req.body.restID)
+        _id: req.body.restID
     })
 
-    if (rest_id === null){
-        return res.send( "ບໍ່ພົບຮ້ານອາຫານ" )
+    if (rest_id === null) {
+        return res.send("ບໍ່ພົບຮ້ານອາຫານ")
     }
 
     try {
 
-        food = new FoodModel({
-            name: req.body.foodName
+        const food = await new FoodModel({
+            owner: rest_id._id,
+            name: req.body.foodName,
+            price: req.body.foodPrice,
+            type: req.body.foodType
         })
 
-        res.send(req.body.restID)
-        
+        const isAdded = await food.save();
+
+        if (isAdded) {
+            return res.send("ເພີ່ມອາຫານສຳເລັດ")
+        }
+
     } catch (error) {
-        
+
         console.log(error.message);
         res.status(500).send("ເກີດຂໍ້ຜິດພາດ");
 
