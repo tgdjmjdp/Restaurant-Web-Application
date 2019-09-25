@@ -71,10 +71,9 @@ const RestFood = ({
                                 {
                                     foodData.map(
                                         (theFood) =>
-
                                             <MDBCol
                                                 style={{ cursor: 'pointer' }}
-                                                lg="4"
+                                                lg="3"
                                                 md="6"
                                                 xm="6"
                                                 xs="6"

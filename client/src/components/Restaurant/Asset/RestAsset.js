@@ -33,14 +33,15 @@ const RestAsset = ({
 
     return (
         <React.Fragment>
-            <MDBContainer className={classes.laoFont}>
+            <MDBContainer fluid className={classes.laoFont}>
                 <MDBRow className="pb-5 px-0 pt-5">
-                    <MDBCol
-                        lg="3"
-                        md="4"
-                        className="pl-0 d-none d-md-block"
-                    >
-                                <div  className="p-3 rounded bg-white">
+                    <MDBCol className="d-none d-md-block" size="3">
+                        <MDBRow end>
+                            <MDBCol
+                                style={{ maxWidth: '300px' }}
+                                className="pl-0"
+                            >
+                                <div className="p-3 rounded bg-white">
                                     <h6 className="font-weight-bold ">
                                         ເມນູ
                                     </h6>
@@ -95,28 +96,29 @@ const RestAsset = ({
                                         </Link>
                                     </List>
                                 </div>
-                            
+                            </MDBCol>
+                        </MDBRow>
                     </MDBCol>
-                    <MDBCol
-                        className="p-0 "
-                        lg="6"
-                        md="8"
-                        sm="12"
-                        xs="12"
-                    >
-                        <div className="p-3 rounded bg-white ">
-                            <Route path={`/rest/:rest_id/home/food`} component={RestFood} />
-                            <Route path="/rest/:rest_id/home/addfood" component={AddFood} />
-                        </div>
-
+                    <MDBCol className="p-0" size="6">
+                        <MDBContainer>
+                            <MDBRow center>
+                                <MDBCol className="p-0">
+                                    <div className="p-3 rounded bg-white ">
+                                        <Route path={`/rest/:rest_id/home/food`} component={RestFood} />
+                                        <Route path="/rest/:rest_id/home/addfood" component={AddFood} />
+                                    </div>
+                                </MDBCol>
+                            </MDBRow>
+                        </MDBContainer>
                     </MDBCol>
-                    <MDBCol
-                        className="pr-0  d-none d-lg-block"
-                        lg="3"
-                    >
-                        <div className="p-3 rounded  bg-white ">
-                            XXXXXXXXXXXXX
-                        </div>
+                    <MDBCol size="3">
+                        <MDBRow>
+                            <MDBCol className="pr-0  d-none d-lg-block" >
+                                <div className="p-3 rounded  bg-white ">
+                                    XXXXXXXXXXXXX
+                                </div>
+                            </MDBCol>
+                        </MDBRow>
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
