@@ -38,63 +38,64 @@ const RestAsset = ({
                     <MDBCol
                         lg="3"
                         md="4"
-                        className="pl-0 d-none d-md-block "
+                        className="pl-0 d-none d-md-block"
                     >
-                        <div className="p-3 rounded bg-white ">
-                            <h6 className="font-weight-bold ">
-                                ເມນູ
-                            </h6>
-                            <List >
-                                <Link to={`/rest/${restData._id}/home/food`} className="text-dark">
-                                    <ListItem className="" button>
-                                        <ListItemIcon>
-                                            <MDBIcon size="lg" icon="concierge-bell" />
-                                        </ListItemIcon>
-                                        <ListItemText className="text-wrap text-break">
-                                            <span style={{ fontFamily: "Saysettha OT" }}>
-                                                ອາຫານ
+                                <div  className="p-3 rounded bg-white">
+                                    <h6 className="font-weight-bold ">
+                                        ເມນູ
+                                    </h6>
+                                    <List >
+                                        <Link to={`/rest/${restData._id}/home/food`} className="text-dark">
+                                            <ListItem className="" button>
+                                                <ListItemIcon>
+                                                    <MDBIcon size="lg" icon="concierge-bell" />
+                                                </ListItemIcon>
+                                                <ListItemText className="text-wrap text-break">
+                                                    <span style={{ fontFamily: "Saysettha OT" }}>
+                                                        ອາຫານ
                                         </span>
-                                        </ListItemText>
-                                    </ListItem>
-                                </Link>
-                                <Link to={`/rest/${restData._id}/home/promotion`} className="text-dark">
-                                    <ListItem button>
-                                        <ListItemIcon>
-                                            <MDBIcon size="lg" icon="tag" />
-                                        </ListItemIcon>
-                                        <ListItemText className="text-wrap text-break">
-                                            <span style={{ fontFamily: "Saysettha OT" }}>
-                                                ໂປຣໂມຊັ່ນ
+                                                </ListItemText>
+                                            </ListItem>
+                                        </Link>
+                                        <Link to={`/rest/${restData._id}/home/promotion`} className="text-dark">
+                                            <ListItem button>
+                                                <ListItemIcon>
+                                                    <MDBIcon size="lg" icon="tag" />
+                                                </ListItemIcon>
+                                                <ListItemText className="text-wrap text-break">
+                                                    <span style={{ fontFamily: "Saysettha OT" }}>
+                                                        ໂປຣໂມຊັ່ນ
                                         </span>
-                                        </ListItemText>
-                                    </ListItem>
-                                </Link>
-                                <Link to={`/rest/${restData._id}/home/vibe`} className="text-dark">
-                                    <ListItem button>
-                                        <ListItemIcon>
-                                            <MDBIcon size="lg" icon="eye" />
-                                        </ListItemIcon>
-                                        <ListItemText className="text-wrap text-break">
-                                            <span style={{ fontFamily: "Saysettha OT" }}>
-                                                ບັນຍາກາດ
+                                                </ListItemText>
+                                            </ListItem>
+                                        </Link>
+                                        <Link to={`/rest/${restData._id}/home/vibe`} className="text-dark">
+                                            <ListItem button>
+                                                <ListItemIcon>
+                                                    <MDBIcon size="lg" icon="eye" />
+                                                </ListItemIcon>
+                                                <ListItemText className="text-wrap text-break">
+                                                    <span style={{ fontFamily: "Saysettha OT" }}>
+                                                        ບັນຍາກາດ
                                         </span>
-                                        </ListItemText>
-                                    </ListItem>
-                                </Link>
-                                <Link to={`/rest/${restData._id}/home/seat`} className="text-dark">
-                                    <ListItem button>
-                                        <ListItemIcon>
-                                            <MDBIcon size="lg" icon="chair" />
-                                        </ListItemIcon>
-                                        <ListItemText className="text-wrap text-break">
-                                            <span style={{ fontFamily: "Saysettha OT" }}>
-                                                ໂຕະ/ບ່ອນນັ່ງ
+                                                </ListItemText>
+                                            </ListItem>
+                                        </Link>
+                                        <Link to={`/rest/${restData._id}/home/seat`} className="text-dark">
+                                            <ListItem button>
+                                                <ListItemIcon>
+                                                    <MDBIcon size="lg" icon="chair" />
+                                                </ListItemIcon>
+                                                <ListItemText className="text-wrap text-break">
+                                                    <span style={{ fontFamily: "Saysettha OT" }}>
+                                                        ໂຕະ/ບ່ອນນັ່ງ
                                         </span>
-                                        </ListItemText>
-                                    </ListItem>
-                                </Link>
-                            </List>
-                        </div>
+                                                </ListItemText>
+                                            </ListItem>
+                                        </Link>
+                                    </List>
+                                </div>
+                            
                     </MDBCol>
                     <MDBCol
                         className="p-0 "

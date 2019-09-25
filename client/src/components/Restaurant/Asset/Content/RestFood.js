@@ -73,22 +73,29 @@ const RestFood = ({
                                         (theFood) =>
 
                                             <MDBCol
-                                                lg="6"
+                                                style={{ cursor: 'pointer' }}
+                                                lg="4"
                                                 md="6"
                                                 xm="6"
                                                 xs="6"
                                                 key={theFood._id}
                                             >
                                                 <Link to={"/food/" + theFood._id}>
-                                                    <MDBCard>
-                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" waves />
-                                                        <MDBCardBody>
-                                                            <MDBCardTitle>
-                                                                {
-                                                                    theFood.name
-                                                                }
-                                                            </MDBCardTitle>
-                                                        </MDBCardBody>
+                                                    <MDBCard className="mb-3 z-depth-0">
+                                                        <MDBCardImage
+                                                            zoom
+                                                            style={{
+                                                                maxHeight: "100px",
+                                                                width: "100%",
+                                                                objectFit: "cover"
+                                                            }}
+                                                            className="img-fluid"
+                                                            src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" 
+                                                            waves
+                                                        />
+                                                        {
+                                                            theFood.name
+                                                        }
                                                     </MDBCard>
                                                 </Link>
 
