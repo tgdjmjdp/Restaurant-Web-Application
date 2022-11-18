@@ -17,7 +17,7 @@
     "react-moment": "^0.9.2",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.1.1",
+    "react-scripts": "5.0.1",
     "react-window-size": "^1.2.2",
     "recharts": "^1.7.1",
     "redux": "^4.0.4",
